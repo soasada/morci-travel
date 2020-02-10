@@ -54,3 +54,5 @@ package-lock.json
 dependency-reduced-pom.xml
 node/
 node_modules/
+morci-travel-api/src/main/resources/public/
+dist/
