@@ -13,3 +13,7 @@
 3. Run app
 
 `mvn -U spring-boot:run -pl :morci-travel-api`
+
+## Run acceptance tests
+
+`mvn -U clean test -pl :acceptance-tests`
