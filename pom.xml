@@ -17,9 +17,9 @@
     <version>0.0.1</version>
 
     <modules>
-        <module>acceptance-tests</module>
         <module>morci-travel-api</module>
         <module>morci-travel-frontend</module>
+        <module>morci-travel-acceptance-tests</module>
     </modules>
 
     <properties>

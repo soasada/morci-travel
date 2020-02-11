@@ -16,4 +16,4 @@
 
 ## Run acceptance tests
 
-`mvn -U clean test -pl :acceptance-tests`
+`mvn -U clean test -pl :morci-travel-acceptance-tests`

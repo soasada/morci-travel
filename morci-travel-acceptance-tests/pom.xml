@@ -10,15 +10,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>acceptance-tests</artifactId>
+    <artifactId>morci-travel-acceptance-tests</artifactId>
 
     <properties>
         <cucumber.version>5.2.0</cucumber.version>
         <selenium.version>3.141.59</selenium.version>
         <htmlunit-driver.version>2.37.0</htmlunit-driver.version>
-        <selenium-jupiter.version>3.3.4</selenium-jupiter.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
-        <junit5.version>5.6.0</junit5.version>
+        <junit.version>4.13</junit.version>
         <lombok.version>1.18.12</lombok.version>
     </properties>
 
@@ -62,13 +61,6 @@
 
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
-            <artifactId>selenium-jupiter</artifactId>
-            <version>${selenium-jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
             <scope>test</scope>
@@ -76,16 +68,9 @@
 
         <!-- JUNIT -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit5.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>${junit5.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
