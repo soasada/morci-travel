@@ -23,6 +23,7 @@
     </properties>
 
     <dependencies>
+        <!-- CUCUMBER -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -37,6 +38,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- SELENIUM -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -72,16 +74,10 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- JUNIT -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit5.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit5.version}</version>
             <scope>test</scope>
         </dependency>
@@ -93,6 +89,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- LOMBOK -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
