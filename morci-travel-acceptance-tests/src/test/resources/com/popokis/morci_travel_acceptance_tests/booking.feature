@@ -4,6 +4,7 @@ Feature: Booking
   Scenario: A client wants to travel from Malaga to Barcelona
     Given A client selects Malaga as departure
     And A client selects Barcelona as arrival
+    And A client selects the desired dates
     And A client clicks on search
     Then The client see the results
     And The client selects the result that interest him most
