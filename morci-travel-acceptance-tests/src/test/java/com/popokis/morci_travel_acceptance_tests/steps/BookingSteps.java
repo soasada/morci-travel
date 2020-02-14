@@ -1,5 +1,6 @@
 package com.popokis.morci_travel_acceptance_tests.steps;
 
+import com.popokis.morci_travel_acceptance_tests.WebPages;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
@@ -9,7 +10,7 @@ public class BookingSteps {
 
   @Given("A client selects {string} as departure")
   public void a_client_selects_as_departure(String departure) {
-    chromeTestRule.getChrome().get("https://google.es");
+    chromeTestRule.getChrome().get(WebPages.HOME.url());
   }
 
   @Given("A client selects {string} as arrival")

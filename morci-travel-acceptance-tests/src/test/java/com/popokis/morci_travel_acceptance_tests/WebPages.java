@@ -1,10 +1,8 @@
 package com.popokis.morci_travel_acceptance_tests;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 @AllArgsConstructor
-@Getter
 public enum WebPages {
   HOME("/"),
   RESULTS("/results"),
@@ -13,4 +11,8 @@ public enum WebPages {
   THANKS("/thanks");
 
   private final String path;
+
+  public String url() {
+    return "http://localhost:8080" + path;
+  }
 }
