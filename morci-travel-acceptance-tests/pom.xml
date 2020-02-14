@@ -19,6 +19,7 @@
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
         <junit.version>4.13</junit.version>
         <lombok.version>1.18.12</lombok.version>
+        <commons-logging.version>1.2</commons-logging.version>
     </properties>
 
     <dependencies>
@@ -85,7 +86,8 @@
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
+            <version>${commons-logging.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
