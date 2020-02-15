@@ -17,3 +17,7 @@
 ## Run acceptance tests
 
 `mvn -U clean test -pl :morci-travel-acceptance-tests`
+
+## To develop frontend hot reload
+
+`cd morci-travel-frontend && bash npm run serve`
