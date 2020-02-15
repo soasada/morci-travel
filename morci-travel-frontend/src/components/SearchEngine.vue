@@ -1,11 +1,13 @@
 <template>
-    <div class="home container">
 
-    </div>
 </template>
 
 <script>
     export default {
-        name: 'Home'
+        name: 'SearchEngine'
     }
 </script>
+
+<style scoped>
+
+</style>
