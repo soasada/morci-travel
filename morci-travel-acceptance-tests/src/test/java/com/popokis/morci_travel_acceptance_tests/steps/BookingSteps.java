@@ -1,8 +1,10 @@
 package com.popokis.morci_travel_acceptance_tests.steps;
 
+import com.popokis.morci_travel_acceptance_tests.WebComponents;
 import com.popokis.morci_travel_acceptance_tests.WebPages;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.openqa.selenium.WebElement;
 
 import static com.popokis.morci_travel_acceptance_tests.RunCucumberTest.chromeTestRule;
 
@@ -11,6 +13,8 @@ public class BookingSteps {
   @Given("A client selects {string} as departure")
   public void a_client_selects_as_departure(String departure) {
     chromeTestRule.getChrome().get(WebPages.HOME.url());
+    WebElement departureSearch = chromeTestRule.getChrome().findElementByClassName(WebComponents.departureSearch());
+    departureSearch.sendKeys(departure);
   }
 
   @Given("A client selects {string} as arrival")
