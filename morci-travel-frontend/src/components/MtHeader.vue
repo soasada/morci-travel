@@ -6,7 +6,13 @@
                      class="d-inline-block align-top">
                 morcitravel
             </router-link>
-
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <router-link class="nav-link" active-class="active" exact :to="{ name: 'about' }">
+                        About
+                    </router-link>
+                </li>
+            </ul>
         </div>
     </nav>
 </template>
