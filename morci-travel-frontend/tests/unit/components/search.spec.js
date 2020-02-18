@@ -2,13 +2,14 @@ import {shallowMount} from '@vue/test-utils';
 import SearchEngine from '@/components/SearchEngine.vue';
 
 describe('SearchEngine.vue', () => {
-
-
-    it('renders props.msg when passed', () => {
-        const msg = 'new message';
-        const wrapper = shallowMount(HelloWorld, {
-            propsData: {msg}
+    const getShallow = (component, props = {}) => {
+        return shallowMount(component, {
+            propsData: props
         });
-        expect(wrapper.text()).toMatch(msg);
+    };
+
+    it('renders the journey type select', () => {
+        const wrapper = getShallow(SearchEngine);
+        expect(wrapper.find('.mt-search-journey-type').exists()).toBe(true);
     });
 });

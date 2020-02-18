@@ -1,5 +1,7 @@
 <template>
+    <div class="mt-search">
 
+    </div>
 </template>
 
 <script>
