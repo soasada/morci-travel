@@ -1,5 +1,6 @@
 <template>
     <div class="home container">
+        <p>{{ $t("welcome") }}</p>
         <SearchEngine>
 
         </SearchEngine>
@@ -7,7 +8,7 @@
 </template>
 
 <script>
-    import SearchEngine from "@/components/SearchEngine";
+    import SearchEngine from '@/components/SearchEngine';
 
     export default {
         name: 'Home',
