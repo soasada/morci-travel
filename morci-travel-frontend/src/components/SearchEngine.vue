@@ -3,23 +3,29 @@
         <form>
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <label for="inputJourneyType">Journey Type</label>
-                    <select id="inputJourneyType" class="form-control mt-search-journey-type">
-                        <option selected value="ONEWAY">One-way</option>
-                        <option value="ROUNDTRIP">Round trip</option>
+                    <label for="inputJourneyType" class="col-form-label col-form-label-sm">{{ $t('journey_type') }}</label>
+                    <select id="inputJourneyType" class="form-control form-control-sm mt-search-journey-type">
+                        <option selected value="ONEWAY">{{ $t('oneway') }}</option>
+                        <option value="ROUNDTRIP">{{ $t('roundtrip') }}</option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputPassengers">Passengers</label>
-                    <select id="inputPassengers" class="form-control mt-search-passengers">
-                        <option value="ONEWAY">One-way</option>
-                        <option value="ROUNDTRIP">Round trip</option>
+                    <label for="inputPassengers" class="col-form-label col-form-label-sm">{{ $t('passenger') }}</label>
+                    <select id="inputPassengers" class="form-control form-control-sm mt-search-passengers">
+                        <option v-for="(item, index) in $t('passengers')" :key="item + index" :value="index">{{item}}</option>
                     </select>
                 </div>
             </div>
 
             <div class="form-row">
-
+                <div class="form-group col-md-3">
+                    <label for="inputDeparture">{{ $t('departure') }}</label>
+                    <input type="text" class="form-control" id="inputDeparture">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="inputArrival">{{ $t('arrival') }}</label>
+                    <input type="text" class="form-control" id="inputArrival">
+                </div>
             </div>
         </form>
     </div>
