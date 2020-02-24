@@ -1,5 +1,5 @@
 <template>
-    <footer class="container">
+    <footer class="container-fluid">
         <div class="row">
             <div class="col-sm">
                 <img alt="Morci Travel logo footer" src="../assets/logo.svg" width="120" height="120"

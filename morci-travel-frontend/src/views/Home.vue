@@ -1,6 +1,5 @@
 <template>
-    <div class="home container">
-        <p>{{ $t("welcome") }}</p>
+    <div class="home">
         <SearchEngine>
 
         </SearchEngine>
