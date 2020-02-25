@@ -4,6 +4,13 @@ import router from './router';
 import store from './store';
 import i18n from './plugins/i18n';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faUser} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+
+library.add(faUser);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 
