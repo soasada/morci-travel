@@ -17,15 +17,13 @@ jobs:
       run: mvn clean install -pl :morci-travel-frontend
     - name: Build backend
       run: mvn clean test package -pl :morci-travel-api
-    - name: Run script
-      run: ls $GITHUB_WORKSPACE
 
-#    - name: Copy file to server
-#      uses: appleboy/scp-action@master
-#      with:
-#        host: ${{ secrets.HOST }}
-#        username: ${{ secrets.USERNAME }}
-#        password: ${{ secrets.PASSWORD }}
-#        port: ${{ secrets.PORT }}
-#        source:
-#        target:
+    - name: Copy file to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        source: $GITHUB_WORKSPACE/morci-travel-api/target/morci-travel-api-0.0.1.jar
+        target: morci-travel-api-0.0.1.jar
