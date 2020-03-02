@@ -13,7 +13,19 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 13
-    - name: Build with frontend
+    - name: Build frontend
       run: mvn clean install -pl :morci-travel-frontend
-    - name: Build with backend
+    - name: Build backend
       run: mvn clean test package -pl :morci-travel-api
+    - name: Run script
+      run: ls $GITHUB_WORKSPACE
+
+#    - name: Copy file to server
+#      uses: appleboy/scp-action@master
+#      with:
+#        host: ${{ secrets.HOST }}
+#        username: ${{ secrets.USERNAME }}
+#        password: ${{ secrets.PASSWORD }}
+#        port: ${{ secrets.PORT }}
+#        source:
+#        target:
