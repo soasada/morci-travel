@@ -18,7 +18,7 @@ jobs:
     - name: Build backend
       run: mvn clean test package -pl :morci-travel-api
 
-    - name: Copy file to server
+    - name: Copy jar to server
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -26,4 +26,5 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         source: ${{ github.workspace }}/morci-travel-api/target/morci-travel-api-0.0.1.jar
-        target: morci-travel-api-0.0.1.jar
+        target: "morci-travel-app"
+        strip_components: 4
