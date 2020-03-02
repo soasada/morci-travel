@@ -36,4 +36,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: java -jar ${{ github.workspace }}/morci-travel-app/morci-travel-api-0.0.1.jar
+          script: java -jar morci-travel-app/morci-travel-api-0.0.1.jar
