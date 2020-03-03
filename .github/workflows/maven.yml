@@ -8,12 +8,12 @@ jobs:
     name: Unit and Integration tests
     runs-on: ubuntu-latest
     services:
-      mongo:
+      mongodb:
         image: mongo:4-bionic
         ports:
-          - 27017:27017
+          - 127.0.0.1:27017:27017
         volumes:
-          - ./data/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js
+          - ${{ github.workspace }}/data/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 13
@@ -27,7 +27,7 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: package
+    needs: unit_and_integration_tests
     runs-on: ubuntu-latest
     steps:
       - name: Copy jar to server
