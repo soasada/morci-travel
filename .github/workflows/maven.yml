@@ -15,9 +15,10 @@ jobs:
         volumes:
           - ${{ github.workspace }}/data/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js
     steps:
+      - name: Check our repository
+        uses: actions/checkout@v2
       - name: Set up JDK 13
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+        uses: actions/setup-java@v1
         with:
           java-version: 13
       - name: Test & Package frontend
