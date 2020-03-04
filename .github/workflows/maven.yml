@@ -48,8 +48,7 @@ jobs:
       - name: Launch app
         uses: fifsky/ssh-action@master
         with:
-          command: |
-            /opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar &
+          command: ls && /opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar &
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
