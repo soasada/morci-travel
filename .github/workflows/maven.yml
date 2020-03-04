@@ -53,4 +53,5 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            /opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar &
+            echo "/opt/prod_jdk/bin/java -jar ~/morci-travel-app/morci-travel-api-0.0.1.jar &" > ~/run_morci_app.sh
+            bash ~/run_morci_app.sh
