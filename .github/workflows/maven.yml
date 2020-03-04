@@ -47,5 +47,5 @@ jobs:
 #          strip_components: 4
       - name: Launch app
         run: |
-          echo ${{ secrets.KEY }} > /tmp/server_key.txt
+          echo ${{ secrets.KEY }} > ${{ github.workspace }}/server_key.txt
           ssh -p ${{ secrets.PORT }} -i /tmp/server_key.txt -f ${{ secrets.USERNAME }}@${{ secrets.HOST }} "/opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar"
