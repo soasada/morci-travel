@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: /opt/prod_jdk/bin/jps -l | grep morci-travel-api-.*.jar
+          script: /opt/prod_jdk/bin/jps -l
 #      - name: Copy jar to server
 #        uses: appleboy/scp-action@master
 #        with:
