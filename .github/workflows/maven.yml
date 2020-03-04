@@ -45,3 +45,12 @@ jobs:
 #          source: ${{ github.workspace }}/morci-travel-api/target/morci-travel-api-0.0.1.jar
 #          target: "morci-travel-app"
 #          strip_components: 4
+      - name: Show java process
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            java -jar morci-travel-app/morci-travel-api.*.jar
