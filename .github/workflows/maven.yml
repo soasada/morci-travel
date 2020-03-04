@@ -46,11 +46,5 @@ jobs:
 #          target: "morci-travel-app"
 #          strip_components: 4
       - name: Launch app
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
-            /opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar > /dev/null 2>&1
+        run: |
+          ssh -p ${{ secrets.PORT }} -i ${{ secrets.KEY }} -f ${{ secrets.USERNAME }}@${{ secrets.HOST }} "/opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar"
