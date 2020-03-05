@@ -45,11 +45,13 @@ jobs:
 #          source: ${{ github.workspace }}/morci-travel-api/target/morci-travel-api-0.0.1.jar
 #          target: "morci-travel-app"
 #          strip_components: 4 command: /opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar &
-      - name: Launch app
+      - name: Prepare SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           echo "${{ secrets.PUBKEY }}" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
+      - name: Launch app
+        run: |
           ssh -f -i ~/.ssh/id_rsa -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "/opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar &"
