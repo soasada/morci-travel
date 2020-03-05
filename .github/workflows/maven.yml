@@ -44,13 +44,11 @@ jobs:
 #          port: ${{ secrets.PORT }}
 #          source: ${{ github.workspace }}/morci-travel-api/target/morci-travel-api-0.0.1.jar
 #          target: "morci-travel-app"
-#          strip_components: 4
+#          strip_components: 4 command: /opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar &
       - name: Launch app
-        uses: fifsky/ssh-action@master
-        with:
-          command: /opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar &
-          host: ${{ secrets.HOST }}
-          user: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-          args: -f -t
+        run: |
+          echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo $(ssh-keyscan -t rsa ${{ secrets.HOST }}) > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh -i ~/.ssh/id_rsa -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "ls -la"
