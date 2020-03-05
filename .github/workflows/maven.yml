@@ -47,6 +47,7 @@ jobs:
 #          strip_components: 4 command: /opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar &
       - name: Launch app
         run: |
+          mkdir -p ~/.ssh
           echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           echo $(ssh-keyscan -t rsa ${{ secrets.HOST }}) > ~/.ssh/known_hosts
