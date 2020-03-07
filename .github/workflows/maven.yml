@@ -37,10 +37,10 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
       - name: Kill java process
         run: |
-          ssh -i ~/.ssh/id_rsa -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'bash -s' < $KILL_JAVA_SH
+          ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'bash -s' < $KILL_JAVA_SH
       - name: Copy jar to server
         run: |
-          scp -i ~/.ssh/id_rsa -P ${{ secrets.PORT }} ${{ github.workspace }}/morci-travel-api/target/morci-travel-api-0.0.1.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~
+          scp -P ${{ secrets.PORT }} ${{ github.workspace }}/morci-travel-api/target/morci-travel-api-0.0.1.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~
       - name: Launch app
         run: |
-          ssh -f -i ~/.ssh/id_rsa -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "/opt/prod_jdk/bin/java -jar morci-travel-api-0.0.1.jar &"
+          ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "/opt/prod_jdk/bin/java -jar morci-travel-api-0.0.1.jar &"
