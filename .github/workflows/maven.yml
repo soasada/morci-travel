@@ -7,6 +7,9 @@ jobs:
   morcitravel_job:
     name: Morcitravel job
     runs-on: ubuntu-latest
+    env:
+      KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
+      SERVER_PUB_KEY: ${{ github.workspace }}/data/server/server_pub_key.txt
     #services:
     #  mongodb:
     #    image: mongo:4-bionic
@@ -15,8 +18,8 @@ jobs:
     #    volumes:
     #      - ${{ github.workspace }}/data/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js
     steps:
-      #- name: Check out repository
-      #  uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v2
       #- name: Set up JDK 13
       #  uses: actions/setup-java@v1
       #  with:
@@ -25,16 +28,16 @@ jobs:
       #  run: mvn -B clean install -pl :morci-travel-frontend
       #- name: Test & Package backend
       #  run: mvn -B clean test package -pl :morci-travel-api
+      - name: Prepare SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          cat "$SERVER_PUB_KEY" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
       - name: Kill java process
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-          script: |
-            MORCIPID=$(/opt/prod_jdk/bin/jps -l | grep morci-travel-api-.*.jar | awk '{print $1}')
-            if [ -n "$MORCIPID" ]; then kill -9 $MORCIPID; else echo 'App not running, maybe the server was restarted'; fi
+        run: |
+          ssh -i ~/.ssh/id_rsa -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'bash -s' < $KILL_JAVA_SH
 #      - name: Copy jar to server
 #        uses: appleboy/scp-action@master
 #        with:
@@ -45,13 +48,6 @@ jobs:
 #          source: ${{ github.workspace }}/morci-travel-api/target/morci-travel-api-0.0.1.jar
 #          target: "morci-travel-app"
 #          strip_components: 4 command: /opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar &
-      - name: Prepare SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          echo "${{ secrets.PUBKEY }}" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
       - name: Launch app
         run: |
           ssh -f -i ~/.ssh/id_rsa -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "/opt/prod_jdk/bin/java -jar morci-travel-app/morci-travel-api-0.0.1.jar &"
