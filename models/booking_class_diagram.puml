@@ -1,0 +1,22 @@
+@startuml
+class Booking {
+  ObjectId id
+  Travellers travellers
+
+  Booking book()
+}
+
+class Travellers {
+  List<Passenger> passengers
+  List<Pet> pets
+  Vehicle vehicle
+
+  Passenger holder()
+}
+
+Booking *-- Travellers
+Travellers *-- Passenger
+Travellers *-- Pet
+Travellers *-- Vehicle
+Vehicle *-- Trailer
+@enduml
