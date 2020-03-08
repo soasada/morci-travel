@@ -43,4 +43,4 @@ jobs:
           scp -P ${{ secrets.PORT }} ${{ github.workspace }}/morci-travel-api/target/morci-travel-api-0.0.1.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~
       - name: Launch app
         run: |
-          ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "/opt/prod_jdk/bin/java -jar morci-travel-api-0.0.1.jar &"
+          ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "/opt/prod_jdk/bin/java -Xms64M -Xmx256M -jar morci-travel-api-0.0.1.jar &"
