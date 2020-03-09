@@ -6,4 +6,10 @@ describe('SearchEngine.vue', () => {
         const wrapper = common.factory(SearchEngine);
         expect(wrapper.find('#inputJourneyType').exists()).toBe(true);
     });
+
+    it('Should hide return date input when oneway is selected', () => {
+        const wrapper = common.factory(SearchEngine);
+        wrapper.find('#inputJourneyType').findAll('option').at(1).setSelected();
+        expect(wrapper.find('#inputReturnDate').isVisible()).toBe(false);
+    });
 });
