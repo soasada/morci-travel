@@ -1,0 +1,15 @@
+@startuml
+class Search {
+  ObjectId id
+  List<Result> results
+}
+
+class Result {
+  BigDecimal price
+  String tariff
+  String description
+  LocalTime departureTime
+}
+
+Search *-- Result
+@enduml
