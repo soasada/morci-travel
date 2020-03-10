@@ -9,7 +9,13 @@ describe('SearchEngine.vue', () => {
 
     it('Should hide return date input when oneway is selected', () => {
         const wrapper = common.factory(SearchEngine);
-        wrapper.find('#inputJourneyType').findAll('option').at(1).setSelected();
+        wrapper.find('#inputJourneyType').findAll('option').at(0).setSelected();
         expect(wrapper.find('#inputReturnDate').isVisible()).toBe(false);
+    });
+
+    it('Should show return date input when roundtrip is selected', () => {
+        const wrapper = common.factory(SearchEngine);
+        wrapper.find('#inputJourneyType').findAll('option').at(1).setSelected();
+        expect(wrapper.find('#inputReturnDate').isVisible()).toBe(true);
     });
 });
