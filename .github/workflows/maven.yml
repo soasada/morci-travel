@@ -10,6 +10,8 @@ jobs:
     env:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
       SERVER_PUB_KEY: ${{ github.workspace }}/data/server/server_pub_key.txt
+      JAVA_CMD_PATH: /opt/prod_jdk/bin/java
+      JAR_NAME: morci-travel-api-0.0.1.jar
     services:
       mongodb:
         image: mongo:4-bionic
@@ -40,7 +42,7 @@ jobs:
           ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'bash -s' < $KILL_JAVA_SH
       - name: Copy jar to server
         run: |
-          scp -P ${{ secrets.PORT }} ${{ github.workspace }}/morci-travel-api/target/morci-travel-api-0.0.1.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~
+          scp -P ${{ secrets.PORT }} ${{ github.workspace }}/morci-travel-api/target/$JAR_NAME ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~
       - name: Launch app
         run: |
-          ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "/opt/prod_jdk/bin/java -Xms64M -Xmx256M -jar morci-travel-api-0.0.1.jar &"
+          ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "$JAVA_CMD_PATH -Xms64M -Xmx256M -jar $JAR_NAME &"
