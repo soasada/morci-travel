@@ -11,7 +11,7 @@
                                     <font-awesome-icon :icon="['fas', 'map-signs']"/>
                                 </div>
                             </div>
-                            <select id="inputJourneyType" class="form-control" v-model="journey_type">
+                            <select id="inputJourneyType" class="form-control" v-model="journeyType">
                                 <option selected value="ONEWAY">{{ $t('oneway') }}</option>
                                 <option value="ROUNDTRIP">{{ $t('roundtrip') }}</option>
                             </select>
@@ -58,7 +58,7 @@
                                id="inputDepartureDate">
                     </div>
 
-                    <div v-show="journey_type === 'ROUNDTRIP'" class="col-md-2 pl-0">
+                    <div v-show="showReturnDate" class="col-md-2 pl-0">
                         <label for="inputReturnDate" class="col-form-label col-form-label-sm"></label>
                         <input ref="inputReturnDate" type="date" class="form-control form-control-sm"
                                id="inputReturnDate">
@@ -74,8 +74,19 @@
         name: 'SearchEngine',
         data() {
             return {
-                journey_type: 'ONEWAY'
+                journeyType: 'ONEWAY',
+                showReturnDate: false
             };
+        },
+        computed: {
+            journeyType() {
+                return this.journeyType;
+            }
+        },
+        watch: {
+            journeyType(newJourneyType) {
+                this.showReturnDate = newJourneyType === 'ROUNDTRIP';
+            }
         }
     }
 </script>
