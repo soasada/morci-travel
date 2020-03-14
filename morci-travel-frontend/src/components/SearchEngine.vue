@@ -3,7 +3,7 @@
         <div class="container">
             <form>
                 <div class="row">
-                    <div class="col-md-2 pr-0">
+                    <div class="col-md-2">
                         <label for="inputJourneyType" class="sr-only">{{ $t('journey_type') }}</label>
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-2 pl-0">
+                    <div class="col-md-2">
                         <label for="inputPassengers" class="sr-only">{{ $t('passenger') }}</label>
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
@@ -36,32 +36,60 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2 pr-1">
-                        <label for="inputDeparture" class="col-form-label col-form-label-sm"></label>
-                        <select id="inputDeparture" class="form-control form-control-sm">
-                            <option selected value="BCN">Barcelona</option>
-                            <option value="AGP">Malaga</option>
-                        </select>
+                    <div class="col-md-2">
+                        <label for="inputDeparture"></label>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <font-awesome-icon :icon="['fas', 'arrow-alt-circle-right']"/>
+                                </div>
+                            </div>
+                            <select id="inputDeparture" class="form-control">
+                                <option selected value="BCN">Barcelona</option>
+                                <option value="AGP">Malaga</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="col-md-2 pl-1">
-                        <label for="inputArrival" class="col-form-label col-form-label-sm"></label>
-                        <select id="inputArrival" class="form-control form-control-sm">
-                            <option selected value="AGP">Malaga</option>
-                            <option value="BCN">Barcelona</option>
-                        </select>
+                    <div class="col-md-2">
+                        <label for="inputArrival" class="sr-only"></label>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <font-awesome-icon :icon="['fas', 'arrow-alt-circle-left']"/>
+                                </div>
+                            </div>
+                            <select id="inputArrival" class="form-control form-control-sm">
+                                <option selected value="AGP">Malaga</option>
+                                <option value="BCN">Barcelona</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="col-md-2 pr-0">
-                        <label for="inputDepartureDate" class="col-form-label col-form-label-sm"></label>
-                        <input ref="inputDepartureDate" type="date" class="form-control form-control-sm"
-                               id="inputDepartureDate">
+                    <div class="col-md-2">
+                        <label for="inputDepartureDate"></label>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <font-awesome-icon :icon="['fas', 'calendar-week']"/>
+                                </div>
+                            </div>
+                            <input ref="inputDepartureDate" type="date" class="form-control"
+                                   id="inputDepartureDate">
+                        </div>
                     </div>
 
-                    <div v-show="journeyType === 'ROUNDTRIP'" class="col-md-2 pl-0">
-                        <label for="inputReturnDate" class="col-form-label col-form-label-sm"></label>
-                        <input ref="inputReturnDate" type="date" class="form-control form-control-sm"
-                               id="inputReturnDate">
+                    <div v-show="journeyType === 'ROUNDTRIP'" class="col-md-2">
+                        <label for="inputReturnDate" class="sr-only"></label>
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <font-awesome-icon :icon="['fas', 'calendar-day']"/>
+                                </div>
+                            </div>
+                            <input ref="inputReturnDate" type="date" class="form-control form-control-sm"
+                                   id="inputReturnDate">
+                        </div>
                     </div>
                 </div>
             </form>

@@ -5,10 +5,24 @@ import store from './store';
 import i18n from './plugins/i18n';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faMapSigns, faUser} from '@fortawesome/free-solid-svg-icons';
+import {
+    faMapSigns,
+    faUser,
+    faArrowAltCircleRight,
+    faArrowAltCircleLeft,
+    faCalendarWeek,
+    faCalendarDay
+} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 
-library.add(faMapSigns, faUser);
+library.add(
+    faMapSigns,
+    faUser,
+    faArrowAltCircleRight,
+    faArrowAltCircleLeft,
+    faCalendarWeek,
+    faCalendarDay
+);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
