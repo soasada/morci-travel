@@ -1,10 +1,21 @@
-import {shallowMount} from '@vue/test-utils';
+import {mount, shallowMount} from '@vue/test-utils';
 import i18n from '@/plugins/i18n';
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 export default {
-    factory(component) {
+    shallow(component) {
         return shallowMount(component, {
+            mocks: {
+                $t: key => i18n.messages.en[key]
+            },
+            stubs: {
+                'font-awesome-icon': FontAwesomeIcon
+            }
+        });
+    },
+
+    mount(component) {
+        return mount(component, {
             mocks: {
                 $t: key => i18n.messages.en[key]
             },

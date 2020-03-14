@@ -58,7 +58,7 @@
                                id="inputDepartureDate">
                     </div>
 
-                    <div v-show="showReturnDate" class="col-md-2 pl-0">
+                    <div v-show="journeyType === 'ROUNDTRIP'" class="col-md-2 pl-0">
                         <label for="inputReturnDate" class="col-form-label col-form-label-sm"></label>
                         <input ref="inputReturnDate" type="date" class="form-control form-control-sm"
                                id="inputReturnDate">
@@ -74,19 +74,8 @@
         name: 'SearchEngine',
         data() {
             return {
-                journeyType: 'ONEWAY',
-                showReturnDate: false
+                journeyType: 'ONEWAY'
             };
-        },
-        computed: {
-            journeyType() {
-                return this.journeyType;
-            }
-        },
-        watch: {
-            journeyType(newJourneyType) {
-                this.showReturnDate = newJourneyType === 'ROUNDTRIP';
-            }
         }
     }
 </script>
