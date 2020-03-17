@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue';
 import SearchEngine from '@/components/SearchEngine.vue';
 import common from './../common';
 

@@ -1,27 +1,47 @@
 import {mount, shallowMount} from '@vue/test-utils';
 import i18n from '@/plugins/i18n';
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {
+    faMapSigns,
+    faUser,
+    faArrowAltCircleRight,
+    faArrowAltCircleLeft,
+    faCalendarWeek,
+    faCalendarDay
+} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+
+library.add(
+    faMapSigns,
+    faUser,
+    faArrowAltCircleRight,
+    faArrowAltCircleLeft,
+    faCalendarWeek,
+    faCalendarDay
+);
 
 export default {
-    shallow(component) {
+    shallow(component, props = {}) {
         return shallowMount(component, {
             mocks: {
                 $t: key => i18n.messages.en[key]
             },
             stubs: {
                 'font-awesome-icon': FontAwesomeIcon
-            }
+            },
+            propsData: props
         });
     },
 
-    mount(component) {
+    mount(component, props = {}) {
         return mount(component, {
             mocks: {
                 $t: key => i18n.messages.en[key]
             },
             stubs: {
                 'font-awesome-icon': FontAwesomeIcon
-            }
+            },
+            propsData: props
         });
     },
 
