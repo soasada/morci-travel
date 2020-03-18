@@ -18,9 +18,9 @@ function generatePassengers(lang) {
 
     for (let i = 0; i < 9; i++) {
         if (i === 0) {
-            passengers.push('1 ' + passengerWord);
+            passengers.push({value: 1, text: '1 ' + passengerWord});
         } else {
-            passengers.push((i + 1) + ' ' + passengerWord + 's');
+            passengers.push({value: (i + 1), text: (i + 1) + ' ' + passengerWord + 's'});
         }
     }
 

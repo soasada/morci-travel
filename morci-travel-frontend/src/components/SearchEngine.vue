@@ -3,36 +3,10 @@
         <div class="container">
             <form>
                 <div class="row">
-                    <div class="col-md-2">
-                        <label for="inputJourneyType" class="sr-only">{{ $t('journey_type') }}</label>
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <font-awesome-icon :icon="['fas', 'map-signs']"/>
-                                </div>
-                            </div>
-                            <select id="inputJourneyType" class="form-control" v-model="journeyType">
-                                <option selected value="ONEWAY">{{ $t('oneway') }}</option>
-                                <option value="ROUNDTRIP">{{ $t('roundtrip') }}</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <label for="inputPassengers" class="sr-only">{{ $t('passenger') }}</label>
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <font-awesome-icon :icon="['fas', 'user']"/>
-                                </div>
-                            </div>
-                            <select id="inputPassengers" class="form-control">
-                                <option v-for="(item, index) in $t('passengers')" :key="item + index" :value="index">
-                                    {{item}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
+                    <InputSelect v-model="journeyType" name="inputJourneyType" :text="$t('journey_type')"
+                                 icon="map-signs" :options="journeyTypes"/>
+                    <InputSelect v-model="passengers" name="inputPassengers" :text="$t('passenger')" icon="user"
+                                 :options="$t('passengers')"/>
                 </div>
 
                 <div class="row">
@@ -98,14 +72,28 @@
 </template>
 
 <script>
+    import InputSelect from '@/components/forms/InputSelect';
+
     export default {
         name: 'SearchEngine',
+        components: {
+            InputSelect
+        },
         data() {
             return {
-                journeyType: 'ONEWAY'
+                journeyType: 'ONEWAY',
+                passengers: 1
             };
+        },
+        computed: {
+            journeyTypes() {
+                return [
+                    {value: 'ONEWAY', text: this.$t('oneway')},
+                    {value: 'ROUNDTRIP', text: this.$t('roundtrip')}
+                ];
+            }
         }
-    }
+    };
 </script>
 
 <style scoped>

@@ -3,6 +3,7 @@ import common from './../../common';
 
 function getProps(name, text, icon = '') {
     return {
+        value: '',
         name: name,
         text: text,
         icon: icon,
@@ -41,11 +42,11 @@ describe('InputSelect.vue', () => {
     it('Should emit on-change-select with selected value', async () => {
         propsWrapper.find('#TEST').findAll('option').at(1).setSelected();
         await propsWrapper.vm.$nextTick();
-        const selectedValue = common.lastEmitted(propsWrapper, 'on-change-select');
+        const selectedValue = common.lastEmitted(propsWrapper, 'input');
         expect(selectedValue).toEqual('Test2');
         propsWrapper.find('#TEST').findAll('option').at(0).setSelected();
         await propsWrapper.vm.$nextTick();
-        const selectedValue2 = common.lastEmitted(propsWrapper, 'on-change-select');
+        const selectedValue2 = common.lastEmitted(propsWrapper, 'input');
         expect(selectedValue2).toEqual('Test1');
     });
 });
