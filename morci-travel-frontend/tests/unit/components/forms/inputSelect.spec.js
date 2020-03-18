@@ -37,4 +37,15 @@ describe('InputSelect.vue', () => {
         expect(propsWrapper.find("#TEST option[value='Test2']").exists()).toBe(true);
         expect(propsWrapper.find("#TEST").findAll('option').at(1).text()).toBe('TEST_TEXT2');
     });
+
+    it('Should emit on-change-select with selected value', async () => {
+        propsWrapper.find('#TEST').findAll('option').at(1).setSelected();
+        await propsWrapper.vm.$nextTick();
+        const selectedValue = common.lastEmitted(propsWrapper, 'on-change-select');
+        expect(selectedValue).toEqual('Test2');
+        propsWrapper.find('#TEST').findAll('option').at(0).setSelected();
+        await propsWrapper.vm.$nextTick();
+        const selectedValue2 = common.lastEmitted(propsWrapper, 'on-change-select');
+        expect(selectedValue2).toEqual('Test1');
+    });
 });
