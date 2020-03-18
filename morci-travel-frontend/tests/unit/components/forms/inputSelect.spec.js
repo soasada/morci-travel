@@ -30,4 +30,11 @@ describe('InputSelect.vue', () => {
     it('Should render icon', () => {
         expect(propsWrapper.find('.fa-user').exists()).toBe(true);
     });
+
+    it('Should render the select with all options', () => {
+        expect(propsWrapper.find("#TEST option[value='Test1']").exists()).toBe(true);
+        expect(propsWrapper.find("#TEST").findAll('option').at(0).text()).toBe('TEST_TEXT1');
+        expect(propsWrapper.find("#TEST option[value='Test2']").exists()).toBe(true);
+        expect(propsWrapper.find("#TEST").findAll('option').at(1).text()).toBe('TEST_TEXT2');
+    });
 });
