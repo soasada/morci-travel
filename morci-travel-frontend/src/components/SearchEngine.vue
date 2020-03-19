@@ -1,47 +1,22 @@
 <template>
     <div class="container-fluid bg-light py-5 mt-search">
         <div class="container">
+            <div class="text-center">
+                <h2>{{$t('search_center_message')}}</h2>
+                <p class="lead">{{$t('search_center_message_lead')}}</p>
+            </div>
             <form>
                 <div class="row">
                     <InputSelect v-model="journeyType" name="inputJourneyType" :text="$t('journey_type')"
                                  icon="map-signs" :options="journeyTypes"/>
                     <InputSelect v-model="passengers" name="inputPassengers" :text="$t('passenger')" icon="user"
                                  :options="$t('passengers')"/>
-                </div>
-
-                <div class="row">
+                    <InputSelect v-model="departure" name="inputDeparture" :text="$t('departure')"
+                                 icon="arrow-alt-circle-right" :options="departures"/>
+                    <InputSelect v-model="arrival" name="inputArrival" text=""
+                                 icon="arrow-alt-circle-left" :options="departures.reverse()"/>
                     <div class="col-md-2">
-                        <label for="inputDeparture"></label>
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <font-awesome-icon :icon="['fas', 'arrow-alt-circle-right']"/>
-                                </div>
-                            </div>
-                            <select id="inputDeparture" class="form-control">
-                                <option selected value="BCN">Barcelona</option>
-                                <option value="AGP">Malaga</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <label for="inputArrival" class="sr-only"></label>
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <font-awesome-icon :icon="['fas', 'arrow-alt-circle-left']"/>
-                                </div>
-                            </div>
-                            <select id="inputArrival" class="form-control form-control-sm">
-                                <option selected value="AGP">Malaga</option>
-                                <option value="BCN">Barcelona</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <label for="inputDepartureDate"></label>
+                        <label for="inputDepartureDate" class="sr-only"></label>
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -53,7 +28,7 @@
                         </div>
                     </div>
 
-                    <div v-show="journeyType === 'ROUNDTRIP'" class="col-md-2">
+                    <div v-show="journeyType === 'ROUNDTRIP'" class="col-md-3">
                         <label for="inputReturnDate" class="sr-only"></label>
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
@@ -82,7 +57,9 @@
         data() {
             return {
                 journeyType: 'ONEWAY',
-                passengers: 1
+                passengers: 1,
+                departure: '',
+                arrival: ''
             };
         },
         computed: {
@@ -90,6 +67,12 @@
                 return [
                     {value: 'ONEWAY', text: this.$t('oneway')},
                     {value: 'ROUNDTRIP', text: this.$t('roundtrip')}
+                ];
+            },
+            departures() {
+                return [
+                    {value: 'BCN', text: 'Barcelona'},
+                    {value: 'AGP', text: 'Malaga'}
                 ];
             }
         }

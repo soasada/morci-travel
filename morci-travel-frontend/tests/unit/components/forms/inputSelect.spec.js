@@ -1,12 +1,10 @@
 import InputSelect from '@/components/forms/InputSelect.vue';
 import common from './../../common';
 
-function getProps(name, text, icon = '') {
+function getProps(id) {
     return {
         value: '',
-        name: name,
-        text: text,
-        icon: icon,
+        id: id,
         options: [
             {
                 value: 'Test1',
@@ -21,15 +19,10 @@ function getProps(name, text, icon = '') {
 }
 
 describe('InputSelect.vue', () => {
-    const propsWrapper = common.shallow(InputSelect, getProps('TEST', 'TEST_TEXT', 'user'));
+    const propsWrapper = common.shallow(InputSelect, getProps('TEST'));
 
-    it('Should render name and text', () => {
+    it('Should render id', () => {
         expect(propsWrapper.find('#TEST').exists()).toBe(true);
-        expect(common.labelText(propsWrapper, 'TEST')).toMatch('TEST_TEXT');
-    });
-
-    it('Should render icon', () => {
-        expect(propsWrapper.find('.fa-user').exists()).toBe(true);
     });
 
     it('Should render the select with all options', () => {
@@ -39,7 +32,7 @@ describe('InputSelect.vue', () => {
         expect(propsWrapper.find("#TEST").findAll('option').at(1).text()).toBe('TEST_TEXT2');
     });
 
-    it('Should emit on-change-select with selected value', async () => {
+    it('Should emit input with selected value', async () => {
         propsWrapper.find('#TEST').findAll('option').at(1).setSelected();
         await propsWrapper.vm.$nextTick();
         const selectedValue = common.lastEmitted(propsWrapper, 'input');

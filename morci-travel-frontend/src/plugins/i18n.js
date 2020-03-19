@@ -36,7 +36,9 @@ const messages = {
         passenger: 'Passengers',
         passengers: generatePassengers('en'),
         departure: 'Departure',
-        arrival: 'Arrival'
+        arrival: 'Arrival',
+        search_center_message: 'What Are You Looking For?',
+        search_center_message_lead: 'Search for least costly fares available!'
     },
     es: {
         welcome: 'Bienvenido',
@@ -46,7 +48,9 @@ const messages = {
         passenger: 'Pasajeros',
         passengers: generatePassengers('es'),
         departure: 'Origen',
-        arrival: 'Destino'
+        arrival: 'Destino',
+        search_center_message: '¿Qué Buscas?',
+        search_center_message_lead: '¡Busca las tarifas más baratas disponibles!'
     }
 };
 
