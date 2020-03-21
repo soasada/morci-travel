@@ -8,14 +8,20 @@
             {{journeyType}}
             <form>
                 <div class="row">
-                    <InputSelectIcon v-model="journeyType" name="inputJourneyType" :text="$t('journey_type')"
-                                 icon="map-signs" :options="journeyTypes"/>
-                    <InputSelectIcon v-model="passengers" name="inputPassengers" :text="$t('passenger')" icon="user"
-                                 :options="$t('passengers')"/>
-                    <InputSelectIcon v-model="departure" name="inputDeparture" :text="$t('departure')"
-                                 icon="arrow-alt-circle-right" :options="departures"/>
-                    <InputSelectIcon v-model="arrival" name="inputArrival" text=""
-                                 icon="arrow-alt-circle-left" :options="departures.reverse()"/>
+                    <div class="col-md-2">
+                        <InputSelectIcon v-model="journeyType" name="inputJourneyType" :text="$t('journey_type')"
+                                         icon="map-signs" :options="journeyTypes"/>
+                    </div>
+                    <div class="col-md-2">
+                        <InputSelectIcon v-model="passengers" name="inputPassengers" :text="$t('passenger')" icon="user"
+                                         :options="$t('passengers')"/>
+                    </div>
+                    <div class="col-md-2">
+                        <InputSelect v-model="departure" name="inputDeparture" :text="$t('departure')" :options="departures"/>
+                    </div>
+                    <div class="col-md-2">
+                        <InputSelect v-model="arrival" name="inputArrival" text="" :options="departures.reverse()"/>
+                    </div>
                     <div class="col-md-2">
                         <label for="inputDepartureDate" class="sr-only"></label>
                         <div class="input-group input-group-sm">
@@ -29,7 +35,7 @@
                         </div>
                     </div>
 
-                    <div v-show="journeyType === 'ROUNDTRIP'" class="col-md-3">
+                    <div v-show="journeyType === 'ROUNDTRIP'" class="col-md-2">
                         <label for="inputReturnDate" class="sr-only"></label>
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
@@ -49,11 +55,13 @@
 
 <script>
     import InputSelectIcon from '@/components/forms/InputSelectIcon';
+    import InputSelect from '@/components/forms/InputSelect';
 
     export default {
         name: 'SearchEngine',
         components: {
-            InputSelectIcon
+            InputSelectIcon,
+            InputSelect
         },
         data() {
             return {

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import SearchEngine from '@/components/SearchEngine.vue';
+import SearchEngine from '@/components/SearchEngine';
 import common from './../common';
 
 describe('SearchEngine.vue', () => {
