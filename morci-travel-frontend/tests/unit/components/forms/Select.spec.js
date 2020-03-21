@@ -1,4 +1,4 @@
-import InputSelect from '@/components/forms/InputSelect.vue';
+import Select from '@/components/forms/Select.vue';
 import common from './../../common';
 
 function getProps(id) {
@@ -18,8 +18,8 @@ function getProps(id) {
     };
 }
 
-describe('InputSelect.vue', () => {
-    const propsWrapper = common.shallow(InputSelect, getProps('TEST'));
+describe('Select.vue', () => {
+    const propsWrapper = common.shallow(Select, getProps('TEST'));
 
     it('Should render id', () => {
         expect(propsWrapper.find('#TEST').exists()).toBe(true);

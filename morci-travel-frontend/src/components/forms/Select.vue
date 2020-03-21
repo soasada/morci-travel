@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        name: 'InputSelect',
+        name: 'Select',
         props: {
             value: {
                 required: true

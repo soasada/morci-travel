@@ -7,11 +7,7 @@
                     <font-awesome-icon :icon="['fas', icon]"/>
                 </div>
             </div>
-            <select :id="name" class="form-control" @change="$emit('input', $event.target.value)">
-                <option v-for="(item, index) in options" :key="item.text + index" :value="item.value">
-                    {{item.text}}
-                </option>
-            </select>
+            <InputSelect :id="label" />
         </div>
     </div>
 </template>
