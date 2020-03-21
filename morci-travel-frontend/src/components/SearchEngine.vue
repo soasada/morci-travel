@@ -5,7 +5,6 @@
                 <h2>{{$t('search_center_message')}}</h2>
                 <p class="lead">{{$t('search_center_message_lead')}}</p>
             </div>
-            {{journeyType}}
             <form>
                 <div class="row">
                     <div class="col-md-2">
@@ -17,7 +16,8 @@
                                          :options="$t('passengers')"/>
                     </div>
                     <div class="col-md-2">
-                        <InputSelect v-model="departure" name="inputDeparture" :text="$t('departure')" :options="departures"/>
+                        <InputSelect v-model="departure" name="inputDeparture" :text="$t('departure')"
+                                     :options="departures"/>
                     </div>
                     <div class="col-md-2">
                         <InputSelect v-model="arrival" name="inputArrival" text="" :options="departures.reverse()"/>
