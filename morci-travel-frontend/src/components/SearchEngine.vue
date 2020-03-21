@@ -5,15 +5,16 @@
                 <h2>{{$t('search_center_message')}}</h2>
                 <p class="lead">{{$t('search_center_message_lead')}}</p>
             </div>
+            {{journeyType}}
             <form>
                 <div class="row">
-                    <InputSelect v-model="journeyType" name="inputJourneyType" :text="$t('journey_type')"
+                    <InputSelectIcon v-model="journeyType" name="inputJourneyType" :text="$t('journey_type')"
                                  icon="map-signs" :options="journeyTypes"/>
-                    <InputSelect v-model="passengers" name="inputPassengers" :text="$t('passenger')" icon="user"
+                    <InputSelectIcon v-model="passengers" name="inputPassengers" :text="$t('passenger')" icon="user"
                                  :options="$t('passengers')"/>
-                    <InputSelect v-model="departure" name="inputDeparture" :text="$t('departure')"
+                    <InputSelectIcon v-model="departure" name="inputDeparture" :text="$t('departure')"
                                  icon="arrow-alt-circle-right" :options="departures"/>
-                    <InputSelect v-model="arrival" name="inputArrival" text=""
+                    <InputSelectIcon v-model="arrival" name="inputArrival" text=""
                                  icon="arrow-alt-circle-left" :options="departures.reverse()"/>
                     <div class="col-md-2">
                         <label for="inputDepartureDate" class="sr-only"></label>
@@ -47,12 +48,12 @@
 </template>
 
 <script>
-    import InputSelect from '@/components/forms/InputSelect';
+    import InputSelectIcon from '@/components/forms/InputSelectIcon';
 
     export default {
         name: 'SearchEngine',
         components: {
-            InputSelect
+            InputSelectIcon
         },
         data() {
             return {

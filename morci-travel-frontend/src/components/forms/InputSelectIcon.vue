@@ -7,18 +7,18 @@
                     <font-awesome-icon :icon="['fas', icon]"/>
                 </div>
             </div>
-            <InputSelect :id="label" />
+            <Select v-model="selectValue" :id="label" :options="options" @input="$emit('input', selectValue)"/>
         </div>
     </div>
 </template>
 
 <script>
-    import InputSelect from '@/components/forms/InputSelect';
+    import Select from '@/components/forms/Select';
 
     export default {
-        name: 'InputSelect',
+        name: 'InputSelectIcon',
         components: {
-            InputSelect
+            Select
         },
         props: {
             value: {
@@ -40,6 +40,11 @@
                 type: Array,
                 required: true
             }
+        },
+        data() {
+            return {
+                selectValue: undefined
+            };
         }
     }
 </script>

@@ -1,10 +1,12 @@
-import Select from '@/components/forms/Select.vue';
+import InputSelectIcon from '@/components/forms/InputSelectIcon';
 import common from './../../common';
 
-function getProps(id) {
+function getProps(label) {
     return {
         value: '',
-        id: id,
+        label: label,
+        text: 'TEST_TEXT',
+        icon: 'user',
         options: [
             {
                 value: 'Test1',
@@ -18,18 +20,15 @@ function getProps(id) {
     };
 }
 
-describe('Select.vue', () => {
-    const propsWrapper = common.shallow(Select, getProps('TEST'));
+describe('InputSelectIcon.vue', () => {
+    const propsWrapper = common.mount(InputSelectIcon, getProps('TEST'));
 
-    it('Should render id', () => {
-        expect(propsWrapper.find('#TEST').exists()).toBe(true);
+    it('Should render label text', () => {
+        expect(common.labelText(propsWrapper, 'TEST')).toBe('TEST_TEXT');
     });
 
-    it('Should render the select with all options', () => {
-        expect(propsWrapper.find("#TEST option[value='Test1']").exists()).toBe(true);
-        expect(propsWrapper.find("#TEST").findAll('option').at(0).text()).toBe('TEST_TEXT1');
-        expect(propsWrapper.find("#TEST option[value='Test2']").exists()).toBe(true);
-        expect(propsWrapper.find("#TEST").findAll('option').at(1).text()).toBe('TEST_TEXT2');
+    it('Should render icon', () => {
+        expect(propsWrapper.find('.fa-user').exists()).toBe(true);
     });
 
     it('Should emit input with selected value', async () => {
