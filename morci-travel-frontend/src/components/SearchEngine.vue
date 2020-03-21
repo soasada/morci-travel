@@ -8,19 +8,19 @@
             <form>
                 <div class="row">
                     <div class="col-md-2">
-                        <InputSelectIcon v-model="journeyType" name="inputJourneyType" :text="$t('journey_type')"
+                        <InputSelectIcon v-model="journeyType" label="inputJourneyType" :text="$t('journey_type')"
                                          icon="map-signs" :options="journeyTypes"/>
                     </div>
                     <div class="col-md-2">
-                        <InputSelectIcon v-model="passengers" name="inputPassengers" :text="$t('passenger')" icon="user"
+                        <InputSelectIcon v-model="passengers" label="inputPassengers" :text="$t('passenger')" icon="user"
                                          :options="$t('passengers')"/>
                     </div>
                     <div class="col-md-2">
-                        <InputSelect v-model="departure" name="inputDeparture" :text="$t('departure')"
+                        <InputSelect v-model="departure" label="inputDeparture" :text="$t('departure')"
                                      :options="departures"/>
                     </div>
                     <div class="col-md-2">
-                        <InputSelect v-model="arrival" name="inputArrival" text="" :options="departures.reverse()"/>
+                        <InputSelect v-model="arrival" label="inputArrival" :text="$t('arrival')" :options="departures.reverse()"/>
                     </div>
                     <div class="col-md-2">
                         <label for="inputDepartureDate" class="sr-only"></label>
