@@ -5,7 +5,7 @@
                 <h2>{{$t('search_center_message')}}</h2>
                 <p class="lead">{{$t('search_center_message_lead')}}</p>
             </div>
-            <form>
+            <form @submit.prevent="search">
                 <div class="row">
                     <div class="col-md-2">
                         <InputSelectIcon v-model="journeyType" label="inputJourneyType" :text="$t('journey_type')"
@@ -75,6 +75,11 @@
                     {value: 'BCN', text: 'Barcelona'},
                     {value: 'AGP', text: 'Malaga'}
                 ];
+            }
+        },
+        methods: {
+            search() {
+
             }
         }
     };
