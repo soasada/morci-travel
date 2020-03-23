@@ -38,7 +38,8 @@ const messages = {
         departure: 'Departure',
         arrival: 'Arrival',
         search_center_message: 'What Are You Looking For?',
-        search_center_message_lead: 'Search for least costly fares available!'
+        search_center_message_lead: 'Search for least costly fares available!',
+        search: 'Search'
     },
     es: {
         welcome: 'Bienvenido',
@@ -50,7 +51,8 @@ const messages = {
         departure: 'Origen',
         arrival: 'Destino',
         search_center_message: '¿Qué Buscas?',
-        search_center_message_lead: '¡Busca las tarifas más baratas disponibles!'
+        search_center_message_lead: '¡Busca las tarifas más baratas disponibles!',
+        search: 'Buscar'
     }
 };
 

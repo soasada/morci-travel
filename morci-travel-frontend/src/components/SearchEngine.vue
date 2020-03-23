@@ -31,6 +31,11 @@
                         <InputDate v-model="returnDate" label="inputReturnDate" text="" icon="calendar-day"/>
                     </div>
                 </div>
+                <div class="row justify-content-md-center">
+                    <div class="col-md-3 py-3">
+                        <button class="btn btn-primary btn-block" type="submit">{{$t('search')}}</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
