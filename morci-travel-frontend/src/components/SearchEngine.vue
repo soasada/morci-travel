@@ -12,40 +12,23 @@
                                          icon="map-signs" :options="journeyTypes"/>
                     </div>
                     <div class="col-md-2">
-                        <InputSelectIcon v-model="passengers" label="inputPassengers" :text="$t('passenger')" icon="user"
-                                         :options="$t('passengers')"/>
+                        <InputSelectIcon v-model="passengers" label="inputPassengers" :text="$t('passenger')"
+                                         icon="user" :options="$t('passengers')"/>
                     </div>
                     <div class="col-md-2">
                         <InputSelect v-model="departure" label="inputDeparture" :text="$t('departure')"
                                      :options="departures"/>
                     </div>
                     <div class="col-md-2">
-                        <InputSelect v-model="arrival" label="inputArrival" :text="$t('arrival')" :options="departures.reverse()"/>
+                        <InputSelect v-model="arrival" label="inputArrival" :text="$t('arrival')"
+                                     :options="departures.reverse()"/>
                     </div>
                     <div class="col-md-2">
-                        <label for="inputDepartureDate" class="sr-only"></label>
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <font-awesome-icon :icon="['fas', 'calendar-week']"/>
-                                </div>
-                            </div>
-                            <input ref="inputDepartureDate" type="date" class="form-control"
-                                   id="inputDepartureDate">
-                        </div>
+                        <InputDate v-model="departureDate" label="inputDepartureDate" text="" icon="calendar-week"/>
                     </div>
 
                     <div v-show="journeyType === 'ROUNDTRIP'" class="col-md-2">
-                        <label for="inputReturnDate" class="sr-only"></label>
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <font-awesome-icon :icon="['fas', 'calendar-day']"/>
-                                </div>
-                            </div>
-                            <input ref="inputReturnDate" type="date" class="form-control form-control-sm"
-                                   id="inputReturnDate">
-                        </div>
+                        <InputDate v-model="returnDate" label="inputReturnDate" text="" icon="calendar-day"/>
                     </div>
                 </div>
             </form>
@@ -56,19 +39,23 @@
 <script>
     import InputSelectIcon from '@/components/forms/InputSelectIcon';
     import InputSelect from '@/components/forms/InputSelect';
+    import InputDate from '@/components/forms/InputDate';
 
     export default {
         name: 'SearchEngine',
         components: {
             InputSelectIcon,
-            InputSelect
+            InputSelect,
+            InputDate
         },
         data() {
             return {
                 journeyType: 'ONEWAY',
                 passengers: 1,
                 departure: '',
-                arrival: ''
+                arrival: '',
+                departureDate: '',
+                returnDate: ''
             };
         },
         computed: {
