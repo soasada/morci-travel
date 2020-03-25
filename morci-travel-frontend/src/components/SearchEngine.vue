@@ -83,7 +83,7 @@
         methods: {
             async search() {
                 const self = this;
-                const response = await fetch("/search", {
+                const response = await fetch("http://localhost:8082/v1/search", {
                     method: 'POST',
                     mode: 'cors',
                     cache: 'no-cache',
