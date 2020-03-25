@@ -1,25 +1,19 @@
 package com.popokis.morci_travel_api.search;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Builder;
+import lombok.NonNull;
 import lombok.Value;
 
 import java.time.LocalDate;
 
 @Value
 @Builder(toBuilder = true)
+@JsonDeserialize(builder = SearchRequest.SearchRequestBuilder.class)
 public class SearchRequest {
-    JourneyType journeyType;
     int passengers;
-    String departure;
-    String arrival;
-    LocalDate departureDate;
+    @NonNull String departure;
+    @NonNull String arrival;
+    @NonNull LocalDate departureDate;
     LocalDate returnDate;
-
-    public enum JourneyType {
-        ONEWAY, ROUNDTRIP;
-
-        public boolean isOneWay() {
-            return this == ONEWAY;
-        }
-    }
 }

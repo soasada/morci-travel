@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/v1")
-public class SearchController {
+class SearchController {
 
     @PostMapping("/search")
     public @ResponseBody String search(@RequestBody SearchRequest searchRequest) {
