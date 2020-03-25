@@ -5,8 +5,8 @@ module.exports = {
     // see https://cli.vuejs.org/config/#devserver-proxy
     devServer: {
         proxy: {
-            '/api/v1': {
-                target: 'http://localhost:8081',
+            '/v1': {
+                target: 'http://localhost:8082',
                 ws: true,
                 changeOrigin: true
             }

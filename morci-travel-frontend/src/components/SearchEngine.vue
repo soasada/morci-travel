@@ -12,23 +12,24 @@
                                          icon="map-signs" :options="journeyTypes"/>
                     </div>
                     <div class="col-md-2">
-                        <InputSelectIcon v-model="passengers" label="inputPassengers" :text="$t('passenger')"
+                        <InputSelectIcon v-model="model.passengers" label="inputPassengers" :text="$t('passenger')"
                                          icon="user" :options="$t('passengers')"/>
                     </div>
                     <div class="col-md-2">
-                        <InputSelect v-model="departure" label="inputDeparture" :text="$t('departure')"
+                        <InputSelect v-model="model.departure" label="inputDeparture" :text="$t('departure')"
                                      :options="departures"/>
                     </div>
                     <div class="col-md-2">
-                        <InputSelect v-model="arrival" label="inputArrival" :text="$t('arrival')"
+                        <InputSelect v-model="model.arrival" label="inputArrival" :text="$t('arrival')"
                                      :options="departures.reverse()"/>
                     </div>
                     <div class="col-md-2">
-                        <InputDate v-model="departureDate" label="inputDepartureDate" text="" icon="calendar-week"/>
+                        <InputDate v-model="model.departureDate" label="inputDepartureDate" text=""
+                                   icon="calendar-week"/>
                     </div>
 
                     <div v-show="journeyType === 'ROUNDTRIP'" class="col-md-2">
-                        <InputDate v-model="returnDate" label="inputReturnDate" text="" icon="calendar-day"/>
+                        <InputDate v-model="model.returnDate" label="inputReturnDate" text="" icon="calendar-day"/>
                     </div>
                 </div>
                 <div class="row justify-content-md-center">
@@ -56,11 +57,13 @@
         data() {
             return {
                 journeyType: 'ONEWAY',
-                passengers: 1,
-                departure: '',
-                arrival: '',
-                departureDate: '',
-                returnDate: ''
+                model: {
+                    passengers: 1,
+                    departure: 'AGP',
+                    arrival: 'BCN',
+                    departureDate: null,
+                    returnDate: null
+                }
             };
         },
         computed: {
@@ -78,8 +81,21 @@
             }
         },
         methods: {
-            search() {
-
+            async search() {
+                const self = this;
+                const response = await fetch("/search", {
+                    method: 'POST',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    redirect: 'follow',
+                    referrerPolicy: 'no-referrer',
+                    body: JSON.stringify(self.model)
+                });
+                return await response.json();
             }
         }
     };
