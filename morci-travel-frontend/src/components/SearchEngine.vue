@@ -85,8 +85,13 @@
             async search() {
                 const response = await http.post('/search', this.model);
                 let eventSource = new EventSource("/v1/sse/" + await response.json());
+
+                eventSource.onerror = () => {
+                    eventSource.close();
+                };
+
                 eventSource.addEventListener('search-result', (e) => {
-                    console.log(e);
+                    console.log(e.data);
                 }, false);
             }
         }
