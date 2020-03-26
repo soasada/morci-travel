@@ -44,12 +44,10 @@ class WebConfig implements WebMvcConfigurer {
         return new BCryptPasswordEncoder();
     }
 
-    /*@Override
+    @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:8080", "http://localhost:8082")
-                .allowedHeaders("*")
-                .allowCredentials(true)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
-    }*/
+    }
 }
