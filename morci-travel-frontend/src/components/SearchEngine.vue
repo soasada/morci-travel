@@ -46,6 +46,7 @@
     import InputSelectIcon from '@/components/forms/InputSelectIcon';
     import InputSelect from '@/components/forms/InputSelect';
     import InputDate from '@/components/forms/InputDate';
+    import http from '@/http';
 
     export default {
         name: 'SearchEngine',
@@ -61,7 +62,7 @@
                     passengers: 1,
                     departure: 'AGP',
                     arrival: 'BCN',
-                    departureDate: null,
+                    departureDate: new Date(),
                     returnDate: null
                 }
             };
@@ -82,20 +83,11 @@
         },
         methods: {
             async search() {
-                const self = this;
-                const response = await fetch("http://localhost:8082/v1/search", {
-                    method: 'POST',
-                    mode: 'cors',
-                    cache: 'no-cache',
-                    credentials: 'same-origin',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    redirect: 'follow',
-                    referrerPolicy: 'no-referrer',
-                    body: JSON.stringify(self.model)
-                });
-                return await response.json();
+                const response = await http.post('/search', this.model);
+                let eventSource = new EventSource("/v1/sse/" + await response.json());
+                eventSource.addEventListener('search-result', (e) => {
+                    console.log(e);
+                }, false);
             }
         }
     };
