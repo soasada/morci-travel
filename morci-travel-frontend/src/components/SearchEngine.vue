@@ -84,7 +84,8 @@
         methods: {
             async search() {
                 const response = await http.post('/search', this.model);
-                let eventSource = new EventSource("/v1/sse/" + await response.json());
+                const searchId = await response.json();
+                let eventSource = new EventSource(`/v1/search/${searchId}/push`);
 
                 eventSource.onerror = () => {
                     eventSource.close();
