@@ -1,6 +1,9 @@
 package com.popokis.morci_travel_api.search;
 
+import com.popokis.morci_travel_api.application.sse.SseApplicationService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,27 +13,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 @RequestMapping("/v1")
 @Slf4j
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 class SearchController {
 
-    private static final Map<String, SseEmitter> EMITTERS = new ConcurrentHashMap<>();
+    private final SseApplicationService sseApplicationService;
 
     @PostMapping("/search")
     public @ResponseBody UUID search(@RequestBody SearchRequest searchRequest) {
-        UUID customerId = UUID.randomUUID();
-        SseEmitter emitter = createEmitter(customerId.toString());
+        UUID correlationId = UUID.randomUUID();
+        SseEmitter emitter = sseApplicationService.create(correlationId.toString());
         CompletableFuture.supplyAsync(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     Thread.sleep(1000);
-                    emitter.send(SseEmitter.event().id(customerId.toString()).data(searchRequest).name("search-result"));
+                    emitter.send(SseEmitter.event().id(correlationId.toString()).data(searchRequest).name("search-result"));
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -38,23 +40,11 @@ class SearchController {
             emitter.complete();
             return "";
         });
-        return customerId;
+        return correlationId;
     }
 
-    @GetMapping("/sse/{customerId}")
-    public SseEmitter getSseEmitter(@PathVariable String customerId) {
-        return EMITTERS.get(customerId);
-    }
-
-    private SseEmitter createEmitter(String customerId) {
-        SseEmitter emitter = new SseEmitter(60 * 1000L);
-
-        emitter.onCompletion(() -> EMITTERS.remove(customerId));
-        emitter.onTimeout(() -> EMITTERS.remove(customerId));
-        emitter.onError(e -> EMITTERS.remove(customerId));
-
-        EMITTERS.put(customerId, emitter);
-
-        return emitter;
+    @GetMapping("/sse/{correlationId}")
+    public SseEmitter getSseEmitter(@PathVariable String correlationId) {
+        return sseApplicationService.get(correlationId);
     }
 }

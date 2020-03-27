@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.EventBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -42,6 +44,16 @@ class WebConfig implements WebMvcConfigurer {
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    Vertx vertx() {
+        return Vertx.vertx();
+    }
+
+    @Bean
+    EventBus eventBus() {
+        return vertx().eventBus();
     }
 
     @Override
