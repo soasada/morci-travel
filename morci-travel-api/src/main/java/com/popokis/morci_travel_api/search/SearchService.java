@@ -23,11 +23,12 @@ public class SearchService {
         return CompletableFuture.supplyAsync(() -> {
             SseEmitter emitter = sseApplicationService.create(searchId);
             for (int i = 0; i < 10; i++) {
+                final int f = i;
                 CompletableFuture.supplyAsync(() -> {
                     try {
                         Thread.sleep(1000);
                         SearchResponse response = SearchResponse.builder()
-                                .company("Flight company 1")
+                                .company("Flight company " + f)
                                 .departureTime(LocalDateTime.of(request.getDepartureDate(), LocalTime.now().plusHours(1)))
                                 .arrivalTime(LocalDateTime.of(request.getDepartureDate().plusDays(1), LocalTime.now()))
                                 .price(BigDecimal.TEN)
@@ -36,6 +37,9 @@ public class SearchService {
                     } catch (Exception e) {
                         emitter.complete();
                         throw new RuntimeException(e);
+                    }
+                    if (f == 9) {
+                        emitter.complete();
                     }
                     return null;
                 }, taskExecutor);
