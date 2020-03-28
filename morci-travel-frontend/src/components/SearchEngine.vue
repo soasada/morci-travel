@@ -34,12 +34,33 @@
                 </div>
                 <div class="row justify-content-md-center">
                     <div class="col-md-3 py-3">
-                        <button v-if="!searching" class="btn btn-primary btn-block" type="submit">{{$t('search')}}</button>
+                        <button v-if="!searching" class="btn btn-primary btn-block" type="submit">{{$t('search')}}
+                        </button>
                         <button v-else class="btn btn-primary btn-block" type="submit" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             {{$t('searching')}}
                         </button>
                     </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <table class="table is-fullwidth">
+                        <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Departure Time</th>
+                            <th>Arrival Time</th>
+                            <th>Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="val in searchResults" :key="val.company">
+                            <td>{{val.company}}</td>
+                            <td>{{val.departureTime}}</td>
+                            <td>{{val.arrivalTime}}</td>
+                            <td>{{val.price}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </form>
         </div>
@@ -50,7 +71,6 @@
     import InputSelectIcon from '@/components/forms/InputSelectIcon';
     import InputSelect from '@/components/forms/InputSelect';
     import InputDate from '@/components/forms/InputDate';
-    import http from '@/http';
 
     export default {
         name: 'SearchEngine',
@@ -68,8 +88,7 @@
                     arrival: 'BCN',
                     departureDate: new Date(),
                     returnDate: null
-                },
-                searching: false
+                }
             };
         },
         computed: {
@@ -84,25 +103,17 @@
                     {value: 'BCN', text: 'Barcelona'},
                     {value: 'AGP', text: 'Malaga'}
                 ];
+            },
+            searching() {
+                return this.$store.state.searching;
+            },
+            searchResults() {
+                return this.$store.state.searchResult;
             }
         },
         methods: {
-            async search() {
-                if (!this.searching) {
-                    this.searching = true;
-                    const response = await http.post('/search', this.model);
-                    const searchId = await response.json();
-                    let eventSource = new EventSource(`/v1/search/${searchId}/push`);
-
-                    eventSource.onerror = () => {
-                        eventSource.close();
-                        this.searching = false
-                    };
-
-                    eventSource.addEventListener('search-result', (e) => {
-                        console.log(e.data);
-                    }, false);
-                }
+            search() {
+                this.$store.dispatch('search', this.model);
             }
         }
     };
