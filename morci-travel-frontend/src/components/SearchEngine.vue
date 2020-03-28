@@ -34,7 +34,11 @@
                 </div>
                 <div class="row justify-content-md-center">
                     <div class="col-md-3 py-3">
-                        <button class="btn btn-primary btn-block" type="submit">{{$t('search')}}</button>
+                        <button v-if="!searching" class="btn btn-primary btn-block" type="submit">{{$t('search')}}</button>
+                        <button v-else class="btn btn-primary btn-block" type="submit" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            {{$t('searching')}}
+                        </button>
                     </div>
                 </div>
             </form>
@@ -64,7 +68,8 @@
                     arrival: 'BCN',
                     departureDate: new Date(),
                     returnDate: null
-                }
+                },
+                searching: false
             };
         },
         computed: {
@@ -83,17 +88,21 @@
         },
         methods: {
             async search() {
-                const response = await http.post('/search', this.model);
-                const searchId = await response.json();
-                let eventSource = new EventSource(`/v1/search/${searchId}/push`);
+                if (!this.searching) {
+                    this.searching = true;
+                    const response = await http.post('/search', this.model);
+                    const searchId = await response.json();
+                    let eventSource = new EventSource(`/v1/search/${searchId}/push`);
 
-                eventSource.onerror = () => {
-                    eventSource.close();
-                };
+                    eventSource.onerror = () => {
+                        eventSource.close();
+                        this.searching = false
+                    };
 
-                eventSource.addEventListener('search-result', (e) => {
-                    console.log(e.data);
-                }, false);
+                    eventSource.addEventListener('search-result', (e) => {
+                        console.log(e.data);
+                    }, false);
+                }
             }
         }
     };
