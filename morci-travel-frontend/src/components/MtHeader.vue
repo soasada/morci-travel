@@ -12,6 +12,11 @@
                         About
                     </router-link>
                 </li>
+                <li class="nav-item dropdown">
+                    <select class="custom-select custom-select-sm d-block w-100" v-model="$i18n.locale">
+                        <option v-for="(lang, i) in $i18n.messages" :key="`Lang${i}`" :value="i">{{ i }}</option>
+                    </select>
+                </li>
             </ul>
         </div>
     </nav>
