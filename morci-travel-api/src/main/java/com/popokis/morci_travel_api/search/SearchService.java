@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @AllArgsConstructor
@@ -26,7 +27,7 @@ public class SearchService {
                 final int f = i;
                 CompletableFuture.supplyAsync(() -> {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(ThreadLocalRandom.current().nextLong(1000, 10000));
                         SearchResponse response = SearchResponse.builder()
                                 .company("Flight company " + f)
                                 .departureTime(LocalDateTime.of(request.getDepartureDate(), LocalTime.now().plusHours(1)))

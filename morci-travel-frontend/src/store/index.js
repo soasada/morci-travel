@@ -35,7 +35,7 @@ export default new Vuex.Store({
                         };
 
                         eventSource.addEventListener('search-result', (e) => {
-                            commit('PUSH_SEARCH_RESULT', e.data);
+                            commit('PUSH_SEARCH_RESULT', JSON.parse(e.data));
                         }, false);
                     });
                 });
