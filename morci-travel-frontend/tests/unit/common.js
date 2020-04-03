@@ -1,28 +1,36 @@
-import {mount, shallowMount} from '@vue/test-utils';
+import {createLocalVue, mount, shallowMount} from '@vue/test-utils';
+import Vuex from 'vuex';
 import i18n from '@/plugins/i18n';
 import {library} from '@fortawesome/fontawesome-svg-core';
+import testStore from './testStore';
 import {
-    faMapSigns,
-    faUser,
-    faArrowAltCircleRight,
     faArrowAltCircleLeft,
+    faArrowAltCircleRight,
+    faCalendarDay,
     faCalendarWeek,
-    faCalendarDay
+    faMapSigns,
+    faUser
 } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 
 library.add(
-    faMapSigns,
-    faUser,
-    faArrowAltCircleRight,
     faArrowAltCircleLeft,
+    faArrowAltCircleRight,
+    faCalendarDay,
     faCalendarWeek,
-    faCalendarDay
+    faMapSigns,
+    faUser
 );
+
+const localVue = createLocalVue();
+
+localVue.use(Vuex);
 
 export default {
     shallow(component, props = {}) {
         return shallowMount(component, {
+            localVue: localVue,
+            store: testStore,
             mocks: {
                 $t: key => i18n.messages.en[key]
             },
@@ -35,6 +43,8 @@ export default {
 
     mount(component, props = {}) {
         return mount(component, {
+            localVue: localVue,
+            store: testStore,
             mocks: {
                 $t: key => i18n.messages.en[key]
             },
