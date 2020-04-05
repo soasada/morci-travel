@@ -15,7 +15,7 @@ public class VersionController {
     private String appVersion;
 
     @GetMapping("/app/version")
-    public VersionResponse getSseEmitter() {
+    public VersionResponse getVersion() {
         return new VersionResponse(appVersion);
     }
 
