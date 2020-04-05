@@ -11,7 +11,7 @@
                 </router-link>
             </div>
             <div class="col-sm">
-                <p class="font-weight-bold">Spring Boot + Vue.js demo app</p>
+                <p class="font-weight-bold">Spring Boot + Vue.js demo app BUILD: {{version}}</p>
                 <p class="font-weight-normal">by <a href="https://github.com/soasada">Nicolás Vargas Ortega</a>.</p>
                 <p class="font-weight-normal">The source code is licensed <a
                         href="http://opensource.org/licenses/mit-license.php">MIT</a>. © {{ new Date().getFullYear() }}
@@ -22,9 +22,24 @@
 </template>
 
 <script>
+    import http from '@/http';
+
     export default {
-        name: 'MtFooter'
-    }
+        name: 'MtFooter',
+        data() {
+            return {
+                version: undefined
+            };
+        },
+        mounted() {
+            const self = this;
+            http.get('/app/version').then(response => {
+                response.json().then(version => {
+                    self.version = version.version;
+                });
+            });
+        }
+    };
 </script>
 
 <style scoped>

@@ -1,8 +1,8 @@
 package com.popokis.morci_travel_api.search;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.popokis.morci_travel_api.application.VerticleAddress;
 import com.popokis.morci_travel_api.application.sse.SseApplicationService;
+import com.popokis.morci_travel_api.application.verticle.VerticleAddress;
 import io.vertx.core.eventbus.EventBus;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;

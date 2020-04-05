@@ -1,6 +1,6 @@
 package com.popokis.morci_travel_api.application.sse;
 
-import com.popokis.morci_travel_api.application.VerticleAddress;
+import com.popokis.morci_travel_api.application.verticle.VerticleAddress;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;

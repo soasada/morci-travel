@@ -1,4 +1,4 @@
-package com.popokis.morci_travel_api.application;
+package com.popokis.morci_travel_api.application.verticle;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
