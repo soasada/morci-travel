@@ -25,9 +25,7 @@ class SearchController {
 
     @PostMapping("/search")
     public @ResponseBody UUID search(@RequestBody SearchRequest searchRequest) {
-        UUID searchId = UUID.randomUUID();
-        searchService.search(searchId.toString(), searchRequest);
-        return searchId;
+        return searchService.search(searchRequest);
     }
 
     @GetMapping("/search/{searchId}/push")
