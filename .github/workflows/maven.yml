@@ -28,16 +28,16 @@ jobs:
           java-version: 13
       - name: Test & Package frontend
         run: mvn -B clean install -pl :morci-travel-frontend
-      - name: Test & Package backend
-        run: mvn -B clean test package -pl :morci-travel-api
       - name: Create version
         run: |
           APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           APP_RELEASE_VERSION_ARRAY=(${APP_RELEASE_VERSION//./ })
           ((APP_RELEASE_VERSION_ARRAY[2]++))
           APP_RELEASE_VERSION="${APP_RELEASE_VERSION_ARRAY[0]}.${APP_RELEASE_VERSION_ARRAY[1]}.${APP_RELEASE_VERSION_ARRAY[2]}"
-          echo "::set-env name=JAR_NAME::$JAR_NAME-$APP_RELEASE_VERSION-SNAPSHOT.jar"
-          mvn --batch-mode release:update-versions -DdevelopmentVersion=$APP_RELEASE_VERSION-SNAPSHOT
+          echo "::set-env name=JAR_NAME::$JAR_NAME$APP_RELEASE_VERSION-SNAPSHOT.jar"
+          mvn -B --batch-mode release:update-versions -DdevelopmentVersion=$APP_RELEASE_VERSION-SNAPSHOT
+      - name: Test
+        run: mvn -B clean test -pl :morci-travel-api
       - name: Prepare SSH Keys
         run: |
           mkdir -p ~/.ssh
