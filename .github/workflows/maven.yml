@@ -54,3 +54,9 @@ jobs:
       - name: Launch app
         run: |
           ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "$JAVA_CMD_PATH -Xms64M -Xmx256M -jar $JAR_NAME &"
+      - name: Commit version
+        run: |
+          git config --global user.name 'Nicolas Vargas Ortega'
+          git config --global user.email 'soasada@users.noreply.github.com'
+          git commit -am "AUTOMATIC: Updated version"
+          git push
