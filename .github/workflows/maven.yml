@@ -11,7 +11,7 @@ jobs:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
       SERVER_PUB_KEY: ${{ github.workspace }}/data/server/server_pub_key.txt
       JAVA_CMD_PATH: /opt/prod_jdk/bin/java
-      JAR_NAME: morci-travel-api-0.0.1.jar
+      JAR_NAME: morci-travel-api-
     services:
       mongodb:
         image: mongo:4-bionic
@@ -30,6 +30,14 @@ jobs:
         run: mvn -B clean install -pl :morci-travel-frontend
       - name: Test & Package backend
         run: mvn -B clean test package -pl :morci-travel-api
+      - name: Create version
+        run: |
+          APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          APP_RELEASE_VERSION_ARRAY=(${APP_RELEASE_VERSION//./ })
+          ((APP_RELEASE_VERSION_ARRAY[2]++))
+          APP_RELEASE_VERSION="${APP_RELEASE_VERSION_ARRAY[0]}.${APP_RELEASE_VERSION_ARRAY[1]}.${APP_RELEASE_VERSION_ARRAY[2]}"
+          echo "::set-env name=JAR_NAME::$JAR_NAME-$APP_RELEASE_VERSION-SNAPSHOT.jar"
+          mvn --batch-mode release:update-versions -DdevelopmentVersion=$APP_RELEASE_VERSION-SNAPSHOT
       - name: Prepare SSH Keys
         run: |
           mkdir -p ~/.ssh
