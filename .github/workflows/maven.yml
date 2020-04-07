@@ -48,7 +48,7 @@ jobs:
       - name: Kill java process
         run: |
           ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'bash -s' < $KILL_JAVA_SH
-      - name: Launch app
+      - name: Remove old artifacts
         run: |
           ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "rm -rf morci-travel-api-*.jar"
       - name: Copy jar to server
