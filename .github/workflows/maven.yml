@@ -48,6 +48,9 @@ jobs:
       - name: Kill java process
         run: |
           ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'bash -s' < $KILL_JAVA_SH
+      - name: Launch app
+        run: |
+          ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "rm -rf morci-travel-api-*.jar"
       - name: Copy jar to server
         run: |
           scp -P ${{ secrets.PORT }} ${{ github.workspace }}/morci-travel-api/target/$JAR_NAME ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~
