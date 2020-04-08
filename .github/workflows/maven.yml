@@ -12,13 +12,6 @@ jobs:
       SERVER_PUB_KEY: ${{ github.workspace }}/data/server/server_pub_key.txt
       JAVA_CMD_PATH: /opt/prod_jdk/bin/java
       JAR_NAME: morci-travel-api-
-    services:
-      mongodb:
-        image: mongo:4-bionic
-        ports:
-          - 27017:27017
-        volumes:
-          - ${{ github.workspace }}/data/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
