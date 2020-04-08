@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
@@ -24,12 +25,12 @@ class SearchController {
     private final SseApplicationService sseApplicationService;
 
     @PostMapping("/search")
-    public @ResponseBody UUID search(@RequestBody SearchRequest searchRequest) {
+    public @ResponseBody UUID search(@Valid @RequestBody SearchRequest searchRequest) {
         return searchService.search(searchRequest);
     }
 
     @GetMapping("/search/{searchId}/push")
-    public SseEmitter getSseEmitter(@PathVariable String searchId) {
-        return sseApplicationService.get(searchId);
+    public SseEmitter getSseEmitter(@PathVariable UUID searchId) {
+        return sseApplicationService.get(searchId.toString());
     }
 }

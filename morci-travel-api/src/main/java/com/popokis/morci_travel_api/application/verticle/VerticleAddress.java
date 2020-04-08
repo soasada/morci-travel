@@ -6,7 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum VerticleAddress {
-    SEARCH_REQUESTS("search.requests"),
+    SEARCH_STARTED("search.started"),
+    SEARCH_LAUNCHED("search.launched"),
     SSE_CLOSE_REQUESTS("sse.close.requests"),
     SSE_COUNTER_REQUESTS("sse.counter.requests");
 
