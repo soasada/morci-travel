@@ -52,7 +52,7 @@ public class SearchWorkerVerticle extends ConsumerVerticle<SearchWorkerVerticle.
     }
 
     @Override
-    public Class<SearchWorkerVerticleRequest> getPayloadType() {
+    public Class<SearchWorkerVerticleRequest> getEventType() {
         return SearchWorkerVerticleRequest.class;
     }
 

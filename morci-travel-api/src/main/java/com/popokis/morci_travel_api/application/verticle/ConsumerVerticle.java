@@ -18,7 +18,7 @@ public abstract class ConsumerVerticle<T> extends AbstractVerticle {
     public void start() throws Exception {
         eventBus.consumer(address, (Message<String> message) -> {
             try {
-                T payload = mapper.readValue(message.body(), getPayloadType());
+                T payload = mapper.readValue(message.body(), getEventType());
                 consume(payload);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
@@ -26,7 +26,7 @@ public abstract class ConsumerVerticle<T> extends AbstractVerticle {
         });
     }
 
-    public abstract void consume(T payload);
+    public abstract void consume(T event);
 
-    public abstract Class<T> getPayloadType();
+    public abstract Class<T> getEventType();
 }

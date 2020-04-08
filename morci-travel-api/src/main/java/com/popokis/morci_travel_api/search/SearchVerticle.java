@@ -12,27 +12,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SearchVerticle extends ConsumerVerticle<SearchVerticle.SearchVerticleRequest> {
+public class SearchVerticle extends ConsumerVerticle<SearchVerticle.SearchStartedEvent> {
 
     @Autowired
     public SearchVerticle(EventBus eventBus, ObjectMapper mapper) {
-        super(eventBus, VerticleAddress.SEARCH_STARTED.getAddress(), mapper);
+        super(eventBus, VerticleAddress.SEARCH_START.getAddress(), mapper);
     }
 
     @Override
-    public void consume(SearchVerticleRequest payload) {
+    public void consume(SearchStartedEvent event) {
         final int numberOfRequests = 10; // calculate number of requests
         for (int i = 0; i < numberOfRequests; i++) {
             eventBus.send(
                     VerticleAddress.SEARCH_LAUNCHED.getAddress(),
-                    createWorkerRequest(i, payload.getSearchId(), payload.getSearchRequest(), numberOfRequests)
+                    createWorkerRequest(i, event.getSearchId(), event.getSearchRequest(), numberOfRequests)
             );
         }
     }
 
     @Override
-    public Class<SearchVerticleRequest> getPayloadType() {
-        return SearchVerticleRequest.class;
+    public Class<SearchStartedEvent> getEventType() {
+        return SearchStartedEvent.class;
     }
 
     @SneakyThrows
@@ -42,8 +42,8 @@ public class SearchVerticle extends ConsumerVerticle<SearchVerticle.SearchVertic
 
     @Value
     @Builder(toBuilder = true)
-    @JsonDeserialize(builder = SearchVerticleRequest.SearchVerticleRequestBuilder.class)
-    public static class SearchVerticleRequest {
+    @JsonDeserialize(builder = SearchStartedEvent.SearchStartedEventBuilder.class)
+    public static class SearchStartedEvent {
         String searchId;
         SearchRequest searchRequest;
     }

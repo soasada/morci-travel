@@ -42,7 +42,7 @@ public class SseCounterVerticle extends ConsumerVerticle<SseCounterVerticle.SseC
     }
 
     @Override
-    public Class<SseCounterVerticleRequest> getPayloadType() {
+    public Class<SseCounterVerticleRequest> getEventType() {
         return SseCounterVerticleRequest.class;
     }
 
