@@ -23,6 +23,7 @@ public class VerticleEventFactory implements EventFactory {
                 SearchVerticle.SearchStartedEvent.builder()
                         .searchId(searchId.toString())
                         .searchRequest(searchRequest)
+                        .build()
         );
     }
 
@@ -35,6 +36,7 @@ public class VerticleEventFactory implements EventFactory {
                         .searchId(searchId)
                         .searchRequest(searchRequest)
                         .totalRequests(totalRequests)
+                        .build()
         );
     }
 }

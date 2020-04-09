@@ -30,7 +30,7 @@ public class SearchWorkerVerticle extends ConsumerVerticle<SearchWorkerVerticle.
     public void consume(SearchLaunchedEvent payload) {
         SseEmitter emitter = sseApplicationService.get(payload.getSearchId());
         try {
-            Thread.sleep(ThreadLocalRandom.current().nextLong(1000, 10000));
+            Thread.sleep(ThreadLocalRandom.current().nextLong(1000, 7000));
             SearchResponse response = SearchResponse.builder()
                     .company("Flight company " + payload.getRequestNumber())
                     .departureTime(LocalDateTime.of(payload.getSearchRequest().getDepartureDate(), LocalTime.now().plusHours(1)))
