@@ -2,6 +2,7 @@ package com.popokis.morci_travel_api.search;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.popokis.morci_travel_api.application.event.EventFactory;
 import com.popokis.morci_travel_api.application.verticle.ConsumerVerticle;
 import com.popokis.morci_travel_api.application.verticle.VerticleAddress;
 import io.vertx.core.eventbus.EventBus;
@@ -14,18 +15,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class SearchVerticle extends ConsumerVerticle<SearchVerticle.SearchStartedEvent> {
 
+    private final EventFactory eventFactory;
+
     @Autowired
-    public SearchVerticle(EventBus eventBus, ObjectMapper mapper) {
+    public SearchVerticle(EventBus eventBus, ObjectMapper mapper, EventFactory eventFactory) {
         super(eventBus, VerticleAddress.SEARCH_START.getAddress(), mapper);
+        this.eventFactory = eventFactory;
     }
 
     @Override
     public void consume(SearchStartedEvent event) {
-        final int numberOfRequests = 10; // calculate number of requests
-        for (int i = 0; i < numberOfRequests; i++) {
+        final int totalRequests = 10; // calculate number of requests
+        for (int i = 0; i < totalRequests; i++) {
             eventBus.send(
-                    VerticleAddress.SEARCH_LAUNCHED.getAddress(),
-                    createWorkerRequest(i, event.getSearchId(), event.getSearchRequest(), numberOfRequests)
+                    VerticleAddress.SEARCH_LAUNCH.getAddress(),
+                    eventFactory.searchLaunchedEvent(i, event.getSearchId(), event.getSearchRequest(), totalRequests)
             );
         }
     }
@@ -33,11 +37,6 @@ public class SearchVerticle extends ConsumerVerticle<SearchVerticle.SearchStarte
     @Override
     public Class<SearchStartedEvent> getEventType() {
         return SearchStartedEvent.class;
-    }
-
-    @SneakyThrows
-    private String createWorkerRequest(int i, String searchId, SearchRequest request, int numberOfRequests) {
-        return mapper.writeValueAsString(new SearchWorkerVerticle.SearchWorkerVerticleRequest(i, searchId, request, numberOfRequests));
     }
 
     @Value

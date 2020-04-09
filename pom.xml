@@ -21,7 +21,7 @@
     </modules>
 
     <properties>
-        <java.version>13</java.version>
+        <java.version>14</java.version>
     </properties>
 
     <build>

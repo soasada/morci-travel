@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class CloseSseVerticle extends AbstractVerticle {
+public class CompleteSseVerticle extends AbstractVerticle {
 
     private final EventBus eventBus;
     private final SseApplicationService sseApplicationService;

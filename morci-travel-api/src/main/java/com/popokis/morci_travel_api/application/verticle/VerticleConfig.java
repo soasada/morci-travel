@@ -1,7 +1,7 @@
 package com.popokis.morci_travel_api.application.verticle;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.popokis.morci_travel_api.application.sse.CloseSseVerticle;
+import com.popokis.morci_travel_api.application.sse.CompleteSseVerticle;
 import com.popokis.morci_travel_api.application.sse.SseApplicationService;
 import com.popokis.morci_travel_api.application.sse.SseCounterVerticle;
 import com.popokis.morci_travel_api.search.SearchVerticle;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 class VerticleConfig {
 
-    private final CloseSseVerticle closeSseVerticle;
+    private final CompleteSseVerticle closeSseVerticle;
     private final SseCounterVerticle sseCounterVerticle;
     private final SearchVerticle searchVerticle;
 

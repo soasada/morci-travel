@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public enum VerticleAddress {
     SEARCH_START("search.start"),
-    SEARCH_LAUNCHED("search.launched"),
+    SEARCH_LAUNCH("search.launch"),
     SSE_CLOSE_REQUESTS("sse.close.requests"),
     SSE_COUNTER_REQUESTS("sse.counter.requests");
 

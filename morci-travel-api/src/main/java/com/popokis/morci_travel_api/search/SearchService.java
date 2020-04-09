@@ -1,7 +1,7 @@
 package com.popokis.morci_travel_api.search;
 
 import com.popokis.morci_travel_api.application.sse.SseApplicationService;
-import com.popokis.morci_travel_api.application.verticle.EventFactory;
+import com.popokis.morci_travel_api.application.event.EventFactory;
 import com.popokis.morci_travel_api.application.verticle.VerticleAddress;
 import com.popokis.morci_travel_api.domain.model.Customer;
 import io.vertx.core.eventbus.EventBus;

@@ -17,22 +17,22 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class SearchWorkerVerticle extends ConsumerVerticle<SearchWorkerVerticle.SearchWorkerVerticleRequest> {
+public class SearchWorkerVerticle extends ConsumerVerticle<SearchWorkerVerticle.SearchLaunchedEvent> {
 
     private final SseApplicationService sseApplicationService;
 
     public SearchWorkerVerticle(EventBus eventBus, SseApplicationService sseApplicationService, ObjectMapper mapper) {
-        super(eventBus, VerticleAddress.SEARCH_LAUNCHED.getAddress(), mapper);
+        super(eventBus, VerticleAddress.SEARCH_LAUNCH.getAddress(), mapper);
         this.sseApplicationService = sseApplicationService;
     }
 
     @Override
-    public void consume(SearchWorkerVerticleRequest payload) {
+    public void consume(SearchLaunchedEvent payload) {
         SseEmitter emitter = sseApplicationService.get(payload.getSearchId());
         try {
             Thread.sleep(ThreadLocalRandom.current().nextLong(1000, 10000));
             SearchResponse response = SearchResponse.builder()
-                    .company("Flight company " + payload.getI())
+                    .company("Flight company " + payload.getRequestNumber())
                     .departureTime(LocalDateTime.of(payload.getSearchRequest().getDepartureDate(), LocalTime.now().plusHours(1)))
                     .arrivalTime(LocalDateTime.of(payload.getSearchRequest().getDepartureDate().plusDays(1), LocalTime.now()))
                     .price(BigDecimal.TEN)
@@ -41,7 +41,7 @@ public class SearchWorkerVerticle extends ConsumerVerticle<SearchWorkerVerticle.
             eventBus.send(
                     VerticleAddress.SSE_COUNTER_REQUESTS.getAddress(),
                     mapper.writeValueAsString(SseCounterVerticle.SseCounterVerticleRequest.builder()
-                            .max(payload.getNumberOfRequests())
+                            .max(payload.getTotalRequests())
                             .searchId(payload.getSearchId())
                             .build()
                     )
@@ -52,17 +52,17 @@ public class SearchWorkerVerticle extends ConsumerVerticle<SearchWorkerVerticle.
     }
 
     @Override
-    public Class<SearchWorkerVerticleRequest> getEventType() {
-        return SearchWorkerVerticleRequest.class;
+    public Class<SearchLaunchedEvent> getEventType() {
+        return SearchLaunchedEvent.class;
     }
 
     @Value
     @Builder(toBuilder = true)
-    @JsonDeserialize(builder = SearchWorkerVerticleRequest.SearchWorkerVerticleRequestBuilder.class)
-    public static class SearchWorkerVerticleRequest {
-        int i;
+    @JsonDeserialize(builder = SearchLaunchedEvent.SearchLaunchedEventBuilder.class)
+    public static class SearchLaunchedEvent {
+        int requestNumber;
         String searchId;
         SearchRequest searchRequest;
-        int numberOfRequests;
+        int totalRequests;
     }
 }
