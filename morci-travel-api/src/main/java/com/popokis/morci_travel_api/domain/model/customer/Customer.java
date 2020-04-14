@@ -2,6 +2,7 @@ package com.popokis.morci_travel_api.domain.model.customer;
 
 import com.popokis.morci_travel_api.domain.model.search.Search;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -16,9 +17,13 @@ public class Customer {
         this.searches = new LinkedList<>();
     }
 
-    public UUID makeSearch() {
+    public UUID makeASearch() {
         Search search = new Search();
         searches.add(search);
         return search.getId();
+    }
+
+    public List<Search> searchHistory() {
+        return Collections.unmodifiableList(searches);
     }
 }

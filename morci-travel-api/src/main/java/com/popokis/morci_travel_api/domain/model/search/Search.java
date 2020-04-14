@@ -5,10 +5,11 @@ import lombok.Getter;
 
 import java.util.UUID;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Search {
 
     @Getter
+    @EqualsAndHashCode.Include
     private final UUID id;
 
     public Search() {

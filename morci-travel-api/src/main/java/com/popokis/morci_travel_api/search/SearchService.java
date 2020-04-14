@@ -22,7 +22,7 @@ public class SearchService {
     @SneakyThrows
     public UUID search(SearchRequest request) {
         Customer customer = new Customer();
-        UUID searchId = customer.makeSearch();
+        UUID searchId = customer.makeASearch();
         sseApplicationService.create(searchId.toString());
         eventBus.send(
                 VerticleAddress.SEARCH_START.getAddress(),
