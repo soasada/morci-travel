@@ -3,9 +3,11 @@ package com.popokis.morci_travel_api.application.verticle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.popokis.morci_travel_api.application.sse.CompleteSseVerticle;
 import com.popokis.morci_travel_api.application.sse.SseApplicationService;
-import com.popokis.morci_travel_api.application.sse.SseCounterVerticle;
+import com.popokis.morci_travel_api.application.search.SearchLaunchFinishListener;
 import com.popokis.morci_travel_api.application.search.SearchStartListener;
-import com.popokis.morci_travel_api.application.search.SearchWorkerVerticle;
+import com.popokis.morci_travel_api.application.search.SearchLaunchListener;
+import com.popokis.morci_travel_api.domain.model.event.EventFactory;
+import com.popokis.morci_travel_api.domain.model.event.EventPublisher;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
@@ -21,13 +23,15 @@ import org.springframework.stereotype.Component;
 class VerticleConfig {
 
     private final CompleteSseVerticle closeSseVerticle;
-    private final SseCounterVerticle sseCounterVerticle;
+    private final SearchLaunchFinishListener sseCounterVerticle;
     private final SearchStartListener searchVerticle;
 
     private final Vertx vertx;
     private final EventBus eventBus;
     private final SseApplicationService sseApplicationService;
     private final ObjectMapper mapper;
+    private final EventPublisher eventPublisher;
+    private final EventFactory eventFactory;
 
     @EventListener(ApplicationReadyEvent.class)
     public void deployVerticles() {
@@ -36,7 +40,7 @@ class VerticleConfig {
         vertx.deployVerticle(searchVerticle);
         DeploymentOptions optionsForSearchVerticle = new DeploymentOptions().setWorker(true);
         for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
-            vertx.deployVerticle(new SearchWorkerVerticle(eventBus, sseApplicationService, mapper), optionsForSearchVerticle);
+            vertx.deployVerticle(new SearchLaunchListener(eventBus, mapper, sseApplicationService, eventPublisher, eventFactory), optionsForSearchVerticle);
         }
         log.info("Verticles deployed");
     }

@@ -12,11 +12,11 @@ import java.util.UUID;
 import static java.util.Objects.nonNull;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public class Search {
 
-    @Getter
     @EqualsAndHashCode.Include
     private UUID id;
     private int passengers;
