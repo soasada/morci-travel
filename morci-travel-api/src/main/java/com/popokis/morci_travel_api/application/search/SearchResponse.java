@@ -1,4 +1,4 @@
-package com.popokis.morci_travel_api.search;
+package com.popokis.morci_travel_api.application.search;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Builder;

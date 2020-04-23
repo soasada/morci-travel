@@ -1,6 +1,7 @@
-package com.popokis.morci_travel_api.search;
+package com.popokis.morci_travel_api.application.search;
 
 import com.popokis.morci_travel_api.application.sse.SseApplicationService;
+import com.popokis.morci_travel_api.domain.model.search.SearchService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,18 +16,19 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import javax.validation.Valid;
 import java.util.UUID;
 
-@RestController
-@RequestMapping("/v1")
 @Slf4j
+@RestController
 @AllArgsConstructor
+@RequestMapping("/v1")
 class SearchController {
 
     private final SearchService searchService;
     private final SseApplicationService sseApplicationService;
+    private final SearchMapper mapper;
 
     @PostMapping("/search")
     public @ResponseBody UUID search(@Valid @RequestBody SearchRequest searchRequest) {
-        return searchService.search(searchRequest);
+        return searchService.search(mapper.toSearch(searchRequest));
     }
 
     @GetMapping("/search/{searchId}/push")

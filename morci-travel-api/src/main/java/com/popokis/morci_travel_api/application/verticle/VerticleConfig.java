@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.popokis.morci_travel_api.application.sse.CompleteSseVerticle;
 import com.popokis.morci_travel_api.application.sse.SseApplicationService;
 import com.popokis.morci_travel_api.application.sse.SseCounterVerticle;
-import com.popokis.morci_travel_api.search.SearchVerticle;
-import com.popokis.morci_travel_api.search.SearchWorkerVerticle;
+import com.popokis.morci_travel_api.application.search.SearchStartListener;
+import com.popokis.morci_travel_api.application.search.SearchWorkerVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
@@ -22,7 +22,7 @@ class VerticleConfig {
 
     private final CompleteSseVerticle closeSseVerticle;
     private final SseCounterVerticle sseCounterVerticle;
-    private final SearchVerticle searchVerticle;
+    private final SearchStartListener searchVerticle;
 
     private final Vertx vertx;
     private final EventBus eventBus;

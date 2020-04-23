@@ -20,7 +20,7 @@ public class Customer {
         this.searches = new LinkedList<>();
     }
 
-    public UUID makeASearch(Search search) {
+    public UUID makesASearch(Search search) {
         searches.add(search);
         return search.getId();
     }

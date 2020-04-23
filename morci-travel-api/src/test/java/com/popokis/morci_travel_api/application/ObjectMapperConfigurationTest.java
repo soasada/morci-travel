@@ -2,7 +2,7 @@ package com.popokis.morci_travel_api.application;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.popokis.morci_travel_api.helper.SearchRequestHelper;
-import com.popokis.morci_travel_api.search.SearchRequest;
+import com.popokis.morci_travel_api.application.search.SearchRequest;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

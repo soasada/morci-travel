@@ -1,6 +1,6 @@
 package com.popokis.morci_travel_api.helper;
 
-import com.popokis.morci_travel_api.search.SearchRequest;
+import com.popokis.morci_travel_api.application.search.SearchRequest;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

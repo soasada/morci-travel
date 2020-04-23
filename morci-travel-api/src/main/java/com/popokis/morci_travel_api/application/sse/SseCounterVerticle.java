@@ -2,7 +2,7 @@ package com.popokis.morci_travel_api.application.sse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.popokis.morci_travel_api.application.verticle.ConsumerVerticle;
+import com.popokis.morci_travel_api.application.event.DefaultEventListener;
 import com.popokis.morci_travel_api.application.verticle.VerticleAddress;
 import io.vertx.core.eventbus.EventBus;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class SseCounterVerticle extends ConsumerVerticle<SseCounterVerticle.SseCounterVerticleRequest> {
+public class SseCounterVerticle extends DefaultEventListener<SseCounterVerticle.SseCounterVerticleRequest> {
 
     private final Map<String, Integer> numberOfRequestsPerSearchId;
 

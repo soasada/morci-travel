@@ -7,12 +7,14 @@ import lombok.Value;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = SearchStartedEvent.SearchStartedEventBuilder.class)
-public class SearchStartedEvent implements Event {
+@JsonDeserialize(builder = SearchLaunchedEvent.SearchLaunchedEventBuilder.class)
+public class SearchLaunchedEvent implements Event {
+    int requestNumber;
     Search search;
+    int totalRequests;
 
     @Override
     public String address() {
-        return "search.start";
+        return "search.launch";
     }
 }

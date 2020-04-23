@@ -9,7 +9,7 @@ class CustomerSearchTest {
     @Test
     void aCustomerShouldBeAbleToMakeASearch() {
         Customer customer = new Customer();
-        customer.makeASearch();
+        customer.makesASearch();
         assertFalse(customer.searchHistory().isEmpty());
     }
 }
