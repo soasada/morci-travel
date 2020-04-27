@@ -12,15 +12,15 @@ import java.util.UUID;
 public class Customer {
 
     @EqualsAndHashCode.Include
-    private UUID id;
+    private String id;
     private List<Search> searches;
 
     public Customer() {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.searches = new LinkedList<>();
     }
 
-    public UUID makesASearch(Search search) {
+    public String makesASearch(Search search) {
         searches.add(search);
         return search.getId();
     }

@@ -12,7 +12,14 @@ class CustomerSearchTest {
     @Test
     void aCustomerShouldBeAbleToMakeASearch() {
         Customer customer = new Customer();
-        customer.makesASearch(new Search(5, "AGP", "BAR", LocalDate.now(), LocalDate.now()));
+        customer.makesASearch(Search.builder()
+                .passengers(5)
+                .departure("AGP")
+                .arrival("BAR")
+                .departureDate(LocalDate.now())
+                .returnDate(LocalDate.now())
+                .build()
+        );
         assertFalse(customer.searchHistory().isEmpty());
     }
 }

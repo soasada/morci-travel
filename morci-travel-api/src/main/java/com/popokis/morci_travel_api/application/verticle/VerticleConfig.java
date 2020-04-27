@@ -1,11 +1,11 @@
 package com.popokis.morci_travel_api.application.verticle;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.popokis.morci_travel_api.application.search.SearchLaunchFinishListener;
+import com.popokis.morci_travel_api.application.search.SearchLaunchListener;
+import com.popokis.morci_travel_api.application.search.SearchStartListener;
 import com.popokis.morci_travel_api.application.sse.CompleteSseVerticle;
 import com.popokis.morci_travel_api.application.sse.SseApplicationService;
-import com.popokis.morci_travel_api.application.search.SearchLaunchFinishListener;
-import com.popokis.morci_travel_api.application.search.SearchStartListener;
-import com.popokis.morci_travel_api.application.search.SearchLaunchListener;
 import com.popokis.morci_travel_api.domain.model.event.EventFactory;
 import com.popokis.morci_travel_api.domain.model.event.EventPublisher;
 import io.vertx.core.DeploymentOptions;

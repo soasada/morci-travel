@@ -27,7 +27,7 @@ class SearchController {
     private final SearchMapper mapper;
 
     @PostMapping("/search")
-    public @ResponseBody UUID search(@Valid @RequestBody SearchRequest searchRequest) {
+    public @ResponseBody String search(@Valid @RequestBody SearchRequest searchRequest) {
         return searchService.search(mapper.toSearch(searchRequest));
     }
 

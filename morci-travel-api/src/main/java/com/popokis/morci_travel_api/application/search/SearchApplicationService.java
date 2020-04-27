@@ -9,8 +9,6 @@ import com.popokis.morci_travel_api.domain.model.search.SearchService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 @AllArgsConstructor
 public class SearchApplicationService implements SearchService {
@@ -20,9 +18,9 @@ public class SearchApplicationService implements SearchService {
     private final EventFactory eventFactory;
 
     @Override
-    public UUID search(Search search) {
+    public String search(Search search) {
         Customer customer = new Customer();
-        UUID searchId = customer.makesASearch(search);
+        String searchId = customer.makesASearch(search);
         sseApplicationService.create(searchId.toString());
         eventPublisher.publish(eventFactory.searchStartedEvent(search));
         return searchId;
