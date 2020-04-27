@@ -1,10 +1,10 @@
 package com.popokis.morci_travel_api.application.verticle;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.popokis.morci_travel_api.application.search.SearchFinishListener;
 import com.popokis.morci_travel_api.application.search.SearchLaunchFinishListener;
 import com.popokis.morci_travel_api.application.search.SearchLaunchListener;
 import com.popokis.morci_travel_api.application.search.SearchStartListener;
-import com.popokis.morci_travel_api.application.sse.CompleteSseVerticle;
 import com.popokis.morci_travel_api.application.sse.SseApplicationService;
 import com.popokis.morci_travel_api.domain.model.event.EventFactory;
 import com.popokis.morci_travel_api.domain.model.event.EventPublisher;
@@ -22,9 +22,9 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 class VerticleConfig {
 
-    private final CompleteSseVerticle closeSseVerticle;
-    private final SearchLaunchFinishListener sseCounterVerticle;
-    private final SearchStartListener searchVerticle;
+    private final SearchFinishListener searchFinishListener;
+    private final SearchLaunchFinishListener searchLaunchFinishListener;
+    private final SearchStartListener searchStartListener;
 
     private final Vertx vertx;
     private final EventBus eventBus;
@@ -35,9 +35,9 @@ class VerticleConfig {
 
     @EventListener(ApplicationReadyEvent.class)
     public void deployVerticles() {
-        vertx.deployVerticle(closeSseVerticle);
-        vertx.deployVerticle(sseCounterVerticle);
-        vertx.deployVerticle(searchVerticle);
+        vertx.deployVerticle(searchFinishListener);
+        vertx.deployVerticle(searchLaunchFinishListener);
+        vertx.deployVerticle(searchStartListener);
         DeploymentOptions optionsForSearchVerticle = new DeploymentOptions().setWorker(true);
         for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
             vertx.deployVerticle(new SearchLaunchListener(eventBus, mapper, sseApplicationService, eventPublisher, eventFactory), optionsForSearchVerticle);

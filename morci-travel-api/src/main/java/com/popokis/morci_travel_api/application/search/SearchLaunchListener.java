@@ -34,7 +34,7 @@ public class SearchLaunchListener extends DefaultEventListener<SearchLaunchedEve
 
     @Override
     public void listen(SearchLaunchedEvent event) {
-        SseEmitter emitter = sseApplicationService.get(event.getSearch().getId().toString());
+        SseEmitter emitter = sseApplicationService.get(event.getSearch().getId());
         try {
             Thread.sleep(ThreadLocalRandom.current().nextLong(1000, 7000));
             SearchResponse response = SearchResponse.builder()
@@ -43,8 +43,8 @@ public class SearchLaunchListener extends DefaultEventListener<SearchLaunchedEve
                     .arrivalTime(LocalDateTime.of(event.getSearch().getDepartureDate().plusDays(1), LocalTime.now()))
                     .price(BigDecimal.TEN)
                     .build();
-            emitter.send(SseEmitter.event().id(event.getSearch().getId().toString()).data(response).name("search-result"));
-            eventPublisher.publish(eventFactory.searchLaunchFinishedEvent(event.getTotalRequests(), event.getSearch().getId().toString()));
+            emitter.send(SseEmitter.event().id(event.getSearch().getId()).data(response).name("search-result"));
+            eventPublisher.publish(eventFactory.searchLaunchFinishedEvent(event.getTotalRequests(), event.getSearch().getId()));
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
