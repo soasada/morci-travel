@@ -21,7 +21,7 @@ public class SearchApplicationService implements SearchService {
     public String search(Search search) {
         Customer customer = new Customer();
         String searchId = customer.makesASearch(search);
-        sseApplicationService.create(searchId.toString());
+        sseApplicationService.create(searchId);
         eventPublisher.publish(eventFactory.searchStartedEvent(search));
         return searchId;
     }
