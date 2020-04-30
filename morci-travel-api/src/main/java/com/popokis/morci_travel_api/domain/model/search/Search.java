@@ -1,5 +1,6 @@
 package com.popokis.morci_travel_api.domain.model.search;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,7 @@ public class Search {
     private LocalDate departureDate;
     private LocalDate returnDate;
 
+    @JsonIgnore
     public boolean isRoundTrip() {
         return nonNull(returnDate);
     }
