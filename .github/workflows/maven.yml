@@ -1,4 +1,4 @@
-name: MorciTravel CI
+name: Morci CI
 
 on: [push]
 
